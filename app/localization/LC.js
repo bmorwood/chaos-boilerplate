@@ -13,13 +13,13 @@
 
 	LC.initialize = function (){
 
-        var locale = Chaos.AppProperties.getInstance().locale;
+        var locales = Chaos.LocalizationProxy.getInstance().localeData;
 
-		this.SYSTEM_DOWN_H1 = 		Chaos.LocalizationUtility.getContent(locale, 'hd1');
-		this.SYSTEM_DOWN_H2 = 		Chaos.LocalizationUtility.getContent(locale, 'hd2');
-        this.SYSTEM_DOWN_BUTTON = 		Chaos.LocalizationUtility.getContent(locale, 'button');
+        this.SYSTEM_DOWN_H1 = 		locales("system-down.h1");
+        this.SYSTEM_DOWN_H2 = 		locales("system-down.h2");
+        this.SYSTEM_DOWN_BUTTON = 	locales("system-down.button");
 
-        this.WELCOME_MESSAGE = 		Chaos.LocalizationUtility.getContent('core', 'welcome_message');
+        this.WELCOME_MESSAGE = locales("core.welcome-message");
 
         new Chaos.LocalizationProxyEvent(Chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY).dispatch();
 	};

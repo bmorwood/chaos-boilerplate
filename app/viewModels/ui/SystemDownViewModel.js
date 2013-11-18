@@ -36,38 +36,20 @@
 	};
 	
 	p.handleShowSystemDown = function($event){
-		
-		var url = 'localized-copy/maintenance.json';
 
-		var scope = this;
-		
-		$.get(url, function($data){
-			scope.handleDataSuccess($data);
-		});
+        Chaos.EventDispatcher.getInstance().addEventListener(Chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.LocalizationProxy.getInstance().loadLocalizedContentSystemDown();
 	};
 	
 	p.handleDataSuccess = function($data){
-		var locale = Chaos.AppProperties.getInstance().locale.toUpperCase();
-
-        if(typeof $data === 'string')
-            $data = JSON.parse( $data )
-
-        var result = $data;
-
-        var sections = [];
-
-        for (var i = result.length - 1; i >= 0; i--){
-            sections.push(Chaos.LocalizedSection.deserialize(result[i]));
-        }
-
-        Chaos.EventDispatcher.getInstance().addEventListener(Chaos.LocalizationEvent.REPOPULATED, this.contentReady, this);
-        Chaos.LocalizationUtility.repopulate(sections);
+        Chaos.EventDispatcher.getInstance().removeEventListener(Chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.EventDispatcher.getInstance().addEventListener(Chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
+        Chaos.LC.initialize();
 	};
 
     p.contentReady = function(){
 
-        Chaos.EventDispatcher.getInstance().removeEventListener(Chaos.LocalizationEvent.REPOPULATED, this.contentReady, this);
-        Chaos.LC.initialize();
+    Chaos.EventDispatcher.getInstance().removeEventListener(Chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
 
         if(Chaos.LC.SYSTEM_DOWN_H1 !== ''){
             this.h1Txt(Chaos.LC.SYSTEM_DOWN_H1);

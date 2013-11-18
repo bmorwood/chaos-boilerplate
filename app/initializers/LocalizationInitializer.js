@@ -23,14 +23,8 @@
 	};
 	
 	p.success = function ($event){
-
-		if(Chaos.LocalizationUtility.initialized)
-			LocalizationUtility.initInstance(this.localizationProxy.localizedContent);
-		else
-			Chaos.LocalizationUtility.repopulate(this.localizationProxy.localizedContent);
-
-		Chaos.LC.initialize();
-		this.$success($event);
+        Chaos.LC.initialize();
+        this.$success($event);
 	};
 
 	p.toString = function (){
