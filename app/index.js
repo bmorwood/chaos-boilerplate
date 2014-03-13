@@ -30,6 +30,7 @@
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
+        chaos.EventDispatcher = Chaos.Core.EventDispatcher;
         chaos.ModelBinder = Chaos.Core.KOModelBinder;
 
         //add controllers
