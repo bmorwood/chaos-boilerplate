@@ -2,16 +2,10 @@
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 .idea
 .idea/*/**
-<<<<<<< HEAD
 .tmp
 node_modules/*/**
 bower_components/*/**
 build
 release
 docs
-=======
-node_modules/*/**
-bower_components/*/**
-build
->>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 .DS_Store
