@@ -30,11 +30,15 @@
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
+        chaos.ModelBinder = Chaos.Core.KOModelBinder;
+
         //add controllers
         chaos.SystemDownController.getInstance();
 
-        var main = new chaos.Main();
-        main.render(appSettings.rootContainer);
+        //var main = new chaos.Main();
+        chaos.Main.render(appSettings.rootContainer);
+
+        //main.render(appSettings.rootContainer);
 
         var preloader = new chaos.PreloaderViewModel();
         preloader.render(appSettings.rootContainer);

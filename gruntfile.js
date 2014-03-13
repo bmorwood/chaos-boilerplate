@@ -36,9 +36,11 @@ module.exports = function(grunt) {
                     'bower_components/jquery-address/src/jquery.address.js',
                     'bower_components/greensock-js/src/uncompressed/**/*.js',
                     'bower_components/knockout/build/output/knockout-latest.js',
+                    'bower_components/knockout-mapping/build/output/knockout.mapping-latest.js',
                     'bower_components/modernizr/modernizr.js',
                     'bower_components/i18next/release/i18next-1.7.1.js',
                     'app/index.js',
+                    'app/core/Chaos.js',
                     'app/**/*.js',
                     '.tmp/*.js',
                 ],
@@ -161,5 +163,7 @@ module.exports = function(grunt) {
         grunt.option('force', true);
         grunt.task.run(tasks);
     });
+
+    grunt.registerTask('run', ['build', 'connect']);
 
 };

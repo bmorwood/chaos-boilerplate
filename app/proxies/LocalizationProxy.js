@@ -18,13 +18,14 @@
 	LocalizationProxy.instance = null;
 
 	LocalizationProxy.getInstance = function (){
-		
+
 		if(LocalizationProxy.instance===null){
 			LocalizationProxy.instance = new LocalizationProxy();
 		}
-			
+
 		return LocalizationProxy.instance;
 	};
+
     /**
     system down button copy
 
@@ -34,11 +35,12 @@
     @static
     **/
 	LocalizationProxy.DEFAULT_LOCALE_CODE = 'en_us';
-	
+
 	var p = LocalizationProxy.prototype;
 
     p.localeData;
     p.options;
+
     /**
     * initialize is used to run code after the class is instantiated.
     * NOTE: you can delete this method and add your code right in the constructor.
@@ -53,7 +55,7 @@
         resGetPath: 'locales/__lng__/__ns__.json'
         };
 	};
-	
+
 	p.loadLocalizedContent = function ($locale){
 
         var localeCode;
@@ -90,7 +92,7 @@
         });
 
     };
-	
+
 	p.handleLoadLocalizedContentSuccess = function($data){
 
 		this.localeData = $data;
@@ -110,6 +112,7 @@
 	p.toString = function (){
 		return '[LocalizationProxy]';
 	};
-	
+
+
 chaos.LocalizationProxy = LocalizationProxy;
 }());

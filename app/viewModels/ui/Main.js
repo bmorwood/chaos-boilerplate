@@ -1,4 +1,16 @@
 (function(){
+
+    var Main = new Chaos.Core.Presenter({
+        name: 'Main',
+        id: 'chaos-main',
+        template: 'Main.html',
+        model: {
+            msg: 'hello world'
+        }
+    });
+
+    return;
+
     /**
      * class of Main.
      *
@@ -60,6 +72,7 @@
     p.toString = function (){
         return 'Main';
     };
+
 
     chaos.Main = Main;
 }());
