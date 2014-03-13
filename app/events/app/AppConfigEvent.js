@@ -33,12 +33,12 @@
      **/
 	AppConfigEvent.CONFIG_LOAD = 'chaos.appconfigevent::config.load';
 
-	var p = AppConfigEvent.prototype = new chaos.AbstractEvent();
-	p.constructor = AppConfigEvent;
+	var p = AppConfigEvent.prototype = new Chaos.Core.Event({
+        name: 'AppConfigEvent',
+        type: AppConfigEvent.$type
+    });
 
-	p.toString = function (){
-		return 'AppConfigEvent';
-	};
+	p.constructor = AppConfigEvent;
 
     chaos.AppConfigEvent = AppConfigEvent;
 }());

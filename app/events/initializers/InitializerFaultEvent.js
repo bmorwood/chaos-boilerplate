@@ -20,15 +20,13 @@
      * @type {String}
      **/
 	InitializerFaultEvent.FAULT = "chaos.initializerfaultevent::fault";
-	
-	var p = InitializerFaultEvent.prototype = new chaos.AbstractEvent();
-	p.constructor = InitializerFaultEvent;
-	
-	p.initializerName;
 
-	p.toString = function (){
-		return "InitializerFaultEvent";
-	};
-	
+	var p = InitializerFaultEvent.prototype = new Chaos.Core.Event({
+        name: 'InitializerFaultEvent',
+        type: InitializerFaultEvent.FAULT,
+        initializerName: InitializerFaultEvent.initializerName
+    });
+	p.constructor = InitializerFaultEvent;
+
     chaos.InitializerFaultEvent = InitializerFaultEvent;
 }());

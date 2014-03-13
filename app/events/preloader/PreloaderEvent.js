@@ -10,38 +10,17 @@
      * @extends chaos.AbstractEvent
      */
 	var PreloaderEvent = function($type, $percentage) {
-		this.percentage = $percentage;
-		this.type = $type;
+            this.type = $type;
+            this.percentage = $percentage;
 	};
-    /**
-     * Fired when the pre-loader is completed and has reached 100%.
-     *
-     * @event COMPLETE
-     * @type {String}
-     **/
-	PreloaderEvent.COMPLETE = 'chaos.preloaderevent::complete';
-    /**
-     * Fired when the pre-loader percentage has changed.
-     *
-     * @event STEP
-     * @type {String}
-     **/
-	PreloaderEvent.STEP = 'chaos.preloaderevent::step';
 
-	var p = PreloaderEvent.prototype = new chaos.AbstractEvent();
-	p.constructor = PreloaderEvent;
-    /**
-    * percentage is used to holder the current percentage of the pre-loader.
-    *
-    * @property percentage
-    * @type {Number}
-    * @default null
-    */
-	p.percentage;
+    PreloaderEvent.COMPLETE = 'chaos.preloaderevent::complete';
+    PreloaderEvent.STEP = 'chaos.preloaderevent::step';
 
-	p.toString = function (){
-		return 'PreloaderEvent';
-	};
-	
+    var p = PreloaderEvent.prototype = new Chaos.Core.Event({
+        name: 'PreloaderEvent'
+    });
+
+    p.constructor = PreloaderEvent;
     chaos.PreloaderEvent = PreloaderEvent;
 }());

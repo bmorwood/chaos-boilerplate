@@ -28,14 +28,14 @@
     * @method getInstance
     */
 	InitializationSequenceOrchestrator.getInstance = function (){
-		
+
 		if(InitializationSequenceOrchestrator.instance===null){
 			InitializationSequenceOrchestrator.instance = new InitializationSequenceOrchestrator();
 		}
-			
+
 		return InitializationSequenceOrchestrator.instance;
 	};
-	
+
 	var p = InitializationSequenceOrchestrator.prototype;
     /**
     * set to true when the orchestrator is finished.
@@ -91,22 +91,22 @@
     * @method next
     */
 	p.next = function (){
-		
+
 		if (this.queue.length > 0) {
 			var pctComplete = (this.MASTER_SEQUENCE.length-this.queue.length)/this.MASTER_SEQUENCE.length;
 			new chaos.PreloaderEvent(chaos.PreloaderEvent.STEP, pctComplete).dispatch();
-			
+
 			var nextItem = this.queue.pop();
 			chaos.logger.info('Executing initializer: ' + nextItem.toString());
 			nextItem.execute();
-		}else{			
+		}else{
 			if (!this.initializationComplete) {
 				this.initializationComplete = true;
                 chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
                 chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
 				new chaos.PreloaderEvent(chaos.PreloaderEvent.STEP, 1).dispatch();
 				new chaos.InitializationCompleteEvent().dispatch();
-			    new chaos.AbstractEvent(chaos.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();
+			    new Chaos.Core.Event(chaos.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();
 				new chaos.PreloaderEvent(chaos.PreloaderEvent.COMPLETE).dispatch();
 
 			}
@@ -135,6 +135,6 @@
 	p.toString = function (){
 		return 'InitializationSequenceOrchestrator';
 	};
-	
+
     chaos.InitializationSequenceOrchestrator = InitializationSequenceOrchestrator;
 }());

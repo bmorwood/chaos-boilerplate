@@ -41,6 +41,7 @@ module.exports = function(grunt) {
                     'bower_components/i18next/release/i18next-1.7.1.js',
                     'app/index.js',
                     'app/core/Chaos.js',
+                    'app/core/*.js',
                     'app/**/*.js',
                     '.tmp/*.js',
                 ],

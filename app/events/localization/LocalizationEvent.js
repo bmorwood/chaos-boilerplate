@@ -29,12 +29,12 @@
      **/
     LocalizationEvent.LOCALIZATION_CONTENT_READY = "chaos.localizationevent::localization.contentcready";
 
-    var p = LocalizationEvent.prototype = new chaos.AbstractEvent();
-    p.constructor = LocalizationEvent;
+    var p = LocalizationEvent.prototype = new Chaos.Core.Event({
+        name: 'LocalizationEvent',
+        params: LocalizationEvent.params,
+        type: LocalizationEvent.type
+    });
 
-    p.toString = function (){
-        return 'LocalizationEvent';
-    };
-
+    LocalizationEvent.constructor = p;
     chaos.LocalizationEvent = LocalizationEvent;
 }());

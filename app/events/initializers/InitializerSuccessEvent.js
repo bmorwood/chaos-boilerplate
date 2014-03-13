@@ -20,15 +20,12 @@
      * @type {String}
      **/
 	InitializerSuccessEvent.SUCCESS = 'chaos.initializersuccessevent::success';
-	
-	var p = InitializerSuccessEvent.prototype = new chaos.AbstractEvent();
-	p.constructor = InitializerSuccessEvent;
-	
-	p.initializerName;
 
-	p.toString = function (){
-		return 'InitializerSuccessEvent';
-	};
-	
+	var p = InitializerSuccessEvent.prototype = new Chaos.Core.Event({
+        name: 'InitializerSuccessEvent',
+        type: InitializerSuccessEvent.SUCCESS,
+        initializerName: InitializerSuccessEvent.initializerName
+    });
+	p.constructor = InitializerSuccessEvent;
     chaos.InitializerSuccessEvent = InitializerSuccessEvent;
 }());

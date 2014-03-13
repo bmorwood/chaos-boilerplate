@@ -26,12 +26,18 @@
          };
 
          var p = Base.prototype = new Chaos.Core.BaseClass(args);
+
+         //for backwards compatibility
+         p.getInstance = function(){
+             return this;
+         };
+
          p.constructor = Base;
 
          p.toString = function (){
              return this.name;
          };
-         
+
          chaos[args.name] = Base; //for namespace template
 
          return p;
