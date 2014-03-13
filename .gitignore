@@ -1,0 +1,11 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+.idea
+.idea/*/**
+.tmp
+node_modules/*/**
+bower_components/*/**
+build
+release
+docs
+.DS_Store
