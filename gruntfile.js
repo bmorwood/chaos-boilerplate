@@ -125,4 +125,6 @@ module.exports = function(grunt) {
         grunt.task.run(tasks);
     });
 
+    grunt.registerTask('run', ['build', 'connect']);
+
 };

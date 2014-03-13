@@ -1,5 +1,16 @@
 (function(){
 
+    // var Main = Chaos.Presenter.create({
+    //     name: 'Main',
+    //     id: 'chaos-main',
+    //     template: 'Main.html',
+    //     model: {
+    //         msg: 'hello world'
+    //     }
+    // });
+    //
+    // return;
+
     var Main = function() {
         if (Main.instance===null) {
             Main.instance = this;

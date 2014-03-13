@@ -1,5 +1,5 @@
 (function(){
-	
+
 	var LocalizationProxy = function() {
 		if (LocalizationProxy.instance===null) {
 			LocalizationProxy.instance = this;
@@ -12,21 +12,21 @@
 	LocalizationProxy.instance = null;
 
 	LocalizationProxy.getInstance = function (){
-		
+
 		if(LocalizationProxy.instance===null){
 			LocalizationProxy.instance = new LocalizationProxy();
 		}
-			
+
 		return LocalizationProxy.instance;
 	};
-	
+
 	LocalizationProxy.DEFAULT_LOCALE_CODE = "en_us";
-	
+
 	var p = LocalizationProxy.prototype;
 
     p.localeData;
     p.options;
-	
+
 	p.initialize = function (){
         this.appSettings = Chaos.AppSettings.getInstance();
 
@@ -36,7 +36,7 @@
         resGetPath: 'locales/__lng__/__ns__.json'
         };
 	};
-	
+
 	p.loadLocalizedContent = function ($locale){
 
         var localeCode;
@@ -50,9 +50,9 @@
 
         var scope = this;
 
-        i18n.init(this.options, function($data) {
+        /*i18n.init(this.options, function($data) {
             scope.handleLoadLocalizedContentSuccess($data)
-        });
+        });*/
 	};
 
     p.loadLocalizedContentSystemDown = function ($locale){
@@ -68,12 +68,12 @@
 
         var scope = this;
 
-        i18n.init(this.options, function($data) {
+        /*i18n.init(this.options, function($data) {
             scope.handleLoadLocalizedContentSuccess($data)
-        });
+        });*/
 
     };
-	
+
 	p.handleLoadLocalizedContentSuccess = function($data){
 
 		this.localeData = $data;
@@ -88,6 +88,6 @@
 	p.toString = function (){
 		return "[LocalizationProxy]";
 	};
-	
+
 Chaos.LocalizationProxy = LocalizationProxy;
 }());
