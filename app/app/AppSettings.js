@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * App settings is used to hold application settings. Contains all the application specific start-up data. e.g. width, height and the root app container.
      *
@@ -6,11 +7,15 @@
      * @constructor
      * @namespace chaos.app
      */
+=======
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
     var AppSettings = function() {
         if (AppSettings.instance===null) {
             AppSettings.instance = this;
             this.initialize();
         }else{
+<<<<<<< HEAD
             chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
         }
     };
@@ -29,6 +34,14 @@
     *
     * @method getInstance
     */
+=======
+            Chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+        }
+    };
+
+    AppSettings.instance = null;
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
     AppSettings.getInstance = function (){
 
         if(AppSettings.instance===null){
@@ -39,6 +52,7 @@
     };
 
     var p = AppSettings.prototype;
+<<<<<<< HEAD
     /**
     * Width is used to set the initial width of the application.
     *
@@ -80,4 +94,18 @@
     };
 
     chaos.AppSettings = AppSettings;
+=======
+
+    p.width = 0;
+    p.height = 0;
+    p.rootContainer;
+
+    p.initialize = function (){};
+
+    p.toString = function (){
+        return '[AppSettings]';
+    };
+
+    Chaos.AppSettings = AppSettings;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

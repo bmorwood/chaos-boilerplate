@@ -1,4 +1,5 @@
 (function($window){
+<<<<<<< HEAD
     /**
      * A utility that brokers HTTP requests...
      *
@@ -27,10 +28,26 @@
         });
 
 
+=======
+
+    var Chaos = function($params){
+
+        var appSettings = Chaos.AppSettings.getInstance();
+        appSettings.width = $params.width || appSettings.width;
+        appSettings.height = $params.height || appSettings.height;
+        appSettings.rootContainer = $params.container || $('<div></div>', {
+            id:'ns-main-container',
+            width: appSettings.width,
+            height: appSettings.height,
+            css:{position:'relative'}
+        });
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
         //add controllers
+<<<<<<< HEAD
         chaos.SystemDownController.getInstance();
 
         var main = new chaos.Main();
@@ -40,11 +57,26 @@
         preloader.render(appSettings.rootContainer);
 
         var systemDown = new chaos.SystemDownViewModel();
+=======
+        Chaos.SystemDownController.getInstance();
+
+        var main = new Chaos.Main();
+        main.render(appSettings.rootContainer);
+
+        var preloader = new Chaos.PreloaderViewModel();
+        preloader.render(appSettings.rootContainer);
+
+        var systemDown = new Chaos.SystemDownViewModel();
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
         systemDown.render(appSettings.rootContainer);
 
     };
 
+<<<<<<< HEAD
     chaos.logger = {
+=======
+    Chaos.logger = {
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
         log: function (){
             if(typeof console == 'object')
                 console.log(arguments[0]);
@@ -63,6 +95,7 @@
         }
     };
 
+<<<<<<< HEAD
     var p = chaos.prototype;
 
     p.init = function (){
@@ -70,3 +103,12 @@
     };
 
     $window.chaos = chaos;
+=======
+    var p = Chaos.prototype;
+
+    p.init = function (){
+        Chaos.InitializationSequenceOrchestrator.getInstance().run();
+    };
+
+    $window.Chaos = Chaos;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079

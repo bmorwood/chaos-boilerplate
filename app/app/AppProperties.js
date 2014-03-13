@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * App Properties is used to hold application specific properties.
      *
@@ -6,11 +7,15 @@
      * @constructor
      * @namespace chaos.app
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var AppProperties = function() {
 		if (AppProperties.instance===null) {
 			AppProperties.instance = this;
 			this.initialize();
 		}else{
+<<<<<<< HEAD
             chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
@@ -32,6 +37,17 @@
 	AppProperties.getInstance = function (){
 		
 		if(AppProperties.instance === null){
+=======
+            Chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+		}
+	};
+
+	AppProperties.instance = null;
+
+	AppProperties.getInstance = function (){
+		
+		if(AppProperties.instance===null){
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 			AppProperties.instance = new AppProperties();
 		}
 			
@@ -40,6 +56,7 @@
 	
 	var p = AppProperties.prototype;
 
+<<<<<<< HEAD
     /**
     * used to hold the value of base URLs. The parameter is set by the location service.
     *
@@ -85,4 +102,21 @@
 	};
 
     chaos.AppProperties = AppProperties;
+=======
+    p.serviceBaseURL;
+    p.locale = 'en-us';
+	
+	p.initialize = function (){};
+
+    p.init = function(){
+        this.serviceBaseURL =  Chaos.ServiceLocator.getInstance().getServiceBaseUrl();
+        new Chaos.AppConfigEvent(Chaos.AppConfigEvent.CONFIG_READY).dispatch();
+    };
+
+	p.toString = function (){
+		return '[AppProperties]';
+	};
+
+    Chaos.AppProperties = AppProperties;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

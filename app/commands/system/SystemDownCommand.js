@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * SystemDownCommand command is used to monitor system errors that require the UI display for the user.
      *
@@ -7,11 +8,15 @@
      * @uses chaos.events.system.SystemDownDisplayEvent
      * @namespace chaos.commands.system
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var SystemDownCommand = function() {
 		this.initialize();
 	};
 	
 	var p = SystemDownCommand.prototype;
+<<<<<<< HEAD
     /**
      * initialize is used to run code after the class is instantiated.
      * NOTE: you can delete this method and add your code right in the constructor.
@@ -42,4 +47,22 @@
 	};
 	
     chaos.SystemDownCommand = SystemDownCommand;
+=======
+	
+	p.initialize = function (){};
+	
+	p.execute = function($event){
+
+		if($event.instruction == Chaos.SystemDownDisplayEvent.SHOW)
+			new Chaos.SystemDownDisplayEvent(Chaos.SystemDownDisplayEvent.SHOW).dispatch();
+		if($event.instruction == Chaos.SystemDownDisplayEvent.HIDE)
+			new Chaos.SystemDownDisplayEvent(Chaos.SystemDownDisplayEvent.HIDE).dispatch();
+	}
+
+	p.toString = function (){
+		return '[SystemDownCommand]';
+	};
+	
+    Chaos.SystemDownCommand = SystemDownCommand;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

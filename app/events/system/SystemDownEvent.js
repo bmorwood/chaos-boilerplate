@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * service of SystemDownEvent.
      *
@@ -19,10 +20,14 @@
      * @extends chaos.AbstractEvent
      * @uses chaos.events.system.SystemDownDisplayEvent
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var SystemDownEvent = function($instruction) {
 		this.instruction = $instruction;
 		this.type = SystemDownEvent.SYSTEM_DOWN;
 	};
+<<<<<<< HEAD
     /**
      * Fired when an sample event occurs...
      *
@@ -32,13 +37,26 @@
 	SystemDownEvent.SYSTEM_DOWN = 'chaos.systemdownevent::system.down';
 
 	var p = SystemDownEvent.prototype = new chaos.AbstractEvent();
+=======
+	
+	SystemDownEvent.SYSTEM_DOWN = "system_down";
+
+	var p = SystemDownEvent.prototype = new Chaos.AbstractEvent();
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	p.constructor = SystemDownEvent;
 	
 	p.instruction;
 
 	p.toString = function (){
+<<<<<<< HEAD
 		return 'SystemDownEvent';
 	};
 	
 chaos.SystemDownEvent = SystemDownEvent;
+=======
+		return "[SystemDownEvent]";
+	};
+	
+Chaos.SystemDownEvent = SystemDownEvent;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * SystemDownController controller is used to listen for system errors and report to commands.
      *
@@ -8,12 +9,16 @@
      * @extends chaos.controllers.AbstractController
      * @uses chaos.SystemDownEvent
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var SystemDownController = function() {
 		
 		if (SystemDownController.instance===null) {
 			SystemDownController.instance = this;
 			this.initialize();
 		}else{
+<<<<<<< HEAD
 			chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
@@ -31,6 +36,14 @@
     *
     * @method getInstance
     */
+=======
+			Chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+		}
+	};
+
+	SystemDownController.instance = null;
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	SystemDownController.getInstance = function (){
 		if(SystemDownController.instance===null){
 			SystemDownController.instance = new SystemDownController();
@@ -38,6 +51,7 @@
 		return SystemDownController.instance;
 	};
 
+<<<<<<< HEAD
     var p = SystemDownController.prototype = new chaos.AbstractController();
 	p.constructor = SystemDownController;
 	
@@ -50,4 +64,18 @@
 	};
 
     chaos.SystemDownController = SystemDownController;
+=======
+    var p = SystemDownController.prototype = new Chaos.AbstractController();
+	p.constructor = SystemDownController;
+	
+	p.initialize = function (){
+		this.addCommand(Chaos.SystemDownEvent.SYSTEM_DOWN, Chaos.SystemDownCommand); //reacts to changes
+	};
+	
+	p.toString = function (){
+		return '[SystemDownController]';
+	};
+
+    Chaos.SystemDownController = SystemDownController;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

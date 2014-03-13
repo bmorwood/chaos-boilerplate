@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * singleton of LocalizationProxyEvent.
      *
@@ -9,11 +10,15 @@
      * @namespace chaos.events.localization
      * @extends chaos.AbstractEvent
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var LocalizationProxyEvent = function($type, $params) {
 		this.params = $params || null;
 		this.type = $type;
 	};
 
+<<<<<<< HEAD
     /**
      * Fired when localized content is loaded.
      *
@@ -58,4 +63,22 @@
 	};
 	
 chaos.LocalizationProxyEvent = LocalizationProxyEvent;
+=======
+	LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT = "load_localization_content";
+	LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS = "load_localization_content_success";
+	LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT = "load_localization_content_fault";
+
+    LocalizationProxyEvent.REPOPULATED
+
+	LocalizationProxyEvent.LOCALIZATION_CONTENT_READY = "localization_content_ready";
+	
+	var p = LocalizationProxyEvent.prototype = new Chaos.AbstractEvent();
+	p.constructor = LocalizationProxyEvent;
+
+	p.toString = function (){
+		return "[LocalizationProxyEvent]";
+	};
+	
+Chaos.LocalizationProxyEvent = LocalizationProxyEvent;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

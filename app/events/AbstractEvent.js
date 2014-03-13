@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * AbstractEvent is used as the base class for other events to extend from.
      *
@@ -7,11 +8,15 @@
      * @param {Event} $type type is the event.
      * @namespace chaos.events
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var AbstractEvent = function($type) { 
 		this.type = $type;
 	};
 	
 	var p = AbstractEvent.prototype;
+<<<<<<< HEAD
     /**
      * holds the event assigned to this instance.
      *
@@ -48,4 +53,19 @@
 	};
 
     chaos.AbstractEvent = AbstractEvent;
+=======
+	
+	p.type;
+	p.target;
+	
+	p.dispatch = function () {
+        Chaos.EventDispatcher.getInstance().dispatchEvent(this);
+	};
+	
+	p.toString = function (){
+		return "[AbstractEvent]";
+	};
+
+    Chaos.AbstractEvent = AbstractEvent;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

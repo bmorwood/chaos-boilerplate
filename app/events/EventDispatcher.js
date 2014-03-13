@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * The class dispatches events so listeners can react accordingly.
      *
@@ -7,6 +8,9 @@
      * @param {Object} $target assign a object to the event.
      * @namespace chaos.events
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var EventDispatcher = function($target) {
 		this.target = $target;
 		this.events = [];
@@ -22,6 +26,7 @@
 	};
 	
 	var p = EventDispatcher.prototype;
+<<<<<<< HEAD
     /**
      * used to reference the target that this event is assigned to.
      *
@@ -86,6 +91,35 @@
      * @param {Method} $listener is the method to call when the an event is dispatched.
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      */
+=======
+	
+	p.target;
+	p.events;
+	
+	p.initialize = function ($target){ 
+		this.events = [];
+	};
+	
+	p.dispatchEvent = function ( $event ) 
+	{
+		if(this.target !== null || this.target !== undefined)
+			$event.target = this.target;
+		
+		var eventListeners = this.events[$event.type];
+		if(!eventListeners) return false;
+		
+		for (var i = eventListeners.length - 1; i >= 0; i--){
+			
+			if(eventListeners[i] != null){
+				//Chaos.logger.log(this, eventListeners[i], $event );
+				eventListeners[i].listener.call(eventListeners[i].context, $event);
+			}
+		};
+		
+		return true;
+	};
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	p.addEventListener = function( $type, $listener, $context) 
 	{
 		
@@ -93,14 +127,23 @@
 		if($listener === undefined) {debugger}
 		if($type === undefined) {debugger}
 
+<<<<<<< HEAD
         if(this.hasEventListener($type, $listener, $context)) chaos.logger.log('hasEventListener ' + $type);
 		
 		if(!this.events[$type]){
             this.events[$type] = [{listener: $listener, context: $context}];
+=======
+        if(this.hasEventListener($type, $listener, $context)) Chaos.logger.log('hasEventListener ' + $type);
+		
+		if(!this.events[$type]){
+			this.events[$type] = [];
+            this.events[$type].push({listener: $listener, context: $context});
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 		}else{
 			this.events[$type].push({listener: $listener, context: $context});
 		}
 	};
+<<<<<<< HEAD
 
 	//alias
     p.on = p.addEventListener;
@@ -116,6 +159,9 @@
      * @param {Method} $listener is the method to call when the an event is dispatched.
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	p.removeEventListener = function( $type, $listener, $context ) 
 	{
 
@@ -139,6 +185,7 @@
 			delete this.events[$type];
 		}
 	};
+<<<<<<< HEAD
     /**
      * Check to see if there are any event listeners for event, method and context.
      *  __example__
@@ -151,6 +198,9 @@
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      * @return {Boolean} 'true' if event listener is assigned already.'false' if no event listener was found.
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	p.hasEventListener = function ($type, $listener, $context){
 		
 		if($context === undefined) {debugger}
@@ -164,6 +214,7 @@
 		
 		return false;
 	};
+<<<<<<< HEAD
     /**
      * Check to see if there are any event listeners for event, method and context.
      *  __example__
@@ -189,4 +240,8 @@
 	};
 
     chaos.EventDispatcher = EventDispatcher;
+=======
+
+    Chaos.EventDispatcher = EventDispatcher;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

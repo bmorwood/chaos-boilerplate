@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * AbstractController is used as the base class for other controllers to extend from.
      *
@@ -6,6 +7,9 @@
      * @constructor
      * @namespace chaos.controllers
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var AbstractController = function() { 
 		this.initialize();
 	};
@@ -16,6 +20,7 @@
 	AbstractController.enabled = true;
 
 	p.addCommand = function ($eventName, $command){
+<<<<<<< HEAD
         if(!AbstractController.commands[$eventName]){
             chaos.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
             AbstractController.commands[$eventName] = [];
@@ -95,4 +100,37 @@
 	};
 
     chaos.AbstractController = AbstractController;
+=======
+        Chaos.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
+		AbstractController.commands[$eventName] = $command;
+	};
+	
+	p.removeCommand = function ($eventName, $command){
+		AbstractController.commands[$eventName] = null;
+		delete AbstractController.commands[$eventName];
+	};
+	
+	p.$initialize = function (){ };
+	p.initialize = function (){ this.$initialize() };
+	
+	AbstractController.handleEvent = function ($event) {
+		
+		if (AbstractController.enabled) {
+			var classRef = AbstractController.commands[$event.type];
+
+			if(!classRef){
+                Chaos.logger.warn('command class not found for event type', $event.type);
+			} else {
+				var commandClass = new classRef();
+				commandClass.execute($event);
+			}
+		}
+	};
+
+	p.toString = function (){
+		return '[AbstractController]';
+	};
+
+    Chaos.AbstractController = AbstractController;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

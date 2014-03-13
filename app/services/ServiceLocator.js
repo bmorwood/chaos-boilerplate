@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * class of ServiceLocator.
      *
@@ -6,12 +7,19 @@
      * @constructor
      * @namespace chaos.services
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var ServiceLocator = function() {
 		if (ServiceLocator.instance===null) {
 			ServiceLocator.instance = this;
 			this.initialize();
 		}else{
+<<<<<<< HEAD
 			chaos.logger.error("You should not call the constructor for " + this.toString() + " directly.  It is a singleton, so you should use getInstance()");
+=======
+			Chaos.logger.error("You should not call the constructor for " + this.toString() + " directly.  It is a singleton, so you should use getInstance()");
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 		}
 	};
 
@@ -48,7 +56,11 @@
 		var hostWithPort = this.extractHostWithPort();
 		var serviceBaseUrl;
 		
+<<<<<<< HEAD
 		chaos.logger.info('Service Locator sees host with port: ' + hostWithPort);
+=======
+		Chaos.logger.info('NS Service Locater sees host with port: ' + hostWithPort);
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 		
 		if (this.serviceDictionary[hostWithPort]) {
 			// Return appropriate mapping URL from dictionary.
@@ -58,9 +70,16 @@
 			serviceBaseUrl = this.serviceDictionary['localhost'];
 		}
 		
+<<<<<<< HEAD
 		chaos.logger.info('NS Service Locator resolved service URL to: ' + serviceBaseUrl);
 		
 		return this.serviceBaseUrl = serviceBaseUrl;
+=======
+		Chaos.logger.info('NS Service Locator resolved service URL to: ' + serviceBaseUrl);
+		
+		return this.serviceBaseUrl = serviceBaseUrl;
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	};
 	
 	p.extractProtocol = function () {
@@ -70,12 +89,17 @@
 	p.extractHostWithPort = function() {
 		var base = $.address.baseURL();
 
+<<<<<<< HEAD
 		chaos.logger.info('NS Service Locator sees base URL: ' + base);
+=======
+		Chaos.logger.info('NS Service Locator sees base URL: ' + base);
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 
 		if (base && base != '')
 			return base.split('//')[1].toString().split('')[0].toString();
 	};
 
+<<<<<<< HEAD
     /**
     * toString returns the class name.
     *
@@ -87,4 +111,11 @@
 	};
 	
 chaos.ServiceLocator = ServiceLocator;
+=======
+	p.toString = function (){
+		return '[ServiceLocator]';
+	};
+	
+Chaos.ServiceLocator = ServiceLocator;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

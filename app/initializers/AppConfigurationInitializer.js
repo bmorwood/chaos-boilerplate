@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * initialize the configuration of teh application.
      *
@@ -8,10 +9,14 @@
      * @extends chaos.initializers.AbstractInitializer
      * @uses chaos.app.AppProperties
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var AppConfigurationInitializer = function() {
 		this.initialize();
 	};
 
+<<<<<<< HEAD
 	var p = AppConfigurationInitializer.prototype = new chaos.AbstractInitializer();
 	p.constructor = AppConfigurationInitializer;
     /**
@@ -24,11 +29,22 @@
 			'APP_CONFIG_INITIALIZER',
             chaos.AppConfigEvent.CONFIG_READY,
             chaos.AppConfigEvent.CONFIG_ERROR
+=======
+	var p = AppConfigurationInitializer.prototype = new Chaos.AbstractInitializer();
+	p.constructor = AppConfigurationInitializer;
+	
+	p.initialize = function (){		
+		this.$initialize(
+			'APP_CONFIG_INITIALIZER',
+            Chaos.AppConfigEvent.CONFIG_READY,
+            Chaos.AppConfigEvent.CONFIG_ERROR
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 			);
 	};
 	
 	p.execute = function (){
 		this.$execute();
+<<<<<<< HEAD
 
         chaos.AppProperties.getInstance().init();
 	};
@@ -38,4 +54,17 @@
 	};
 	
     chaos.AppConfigurationInitializer = AppConfigurationInitializer;
+=======
+        //AppConfigurationInitializer.execute.apply(this, arguments)
+		//Chaos.AppConfig.getInstance().loadProperties();
+
+        Chaos.AppProperties.getInstance().init();
+	};
+
+	p.toString = function (){
+		return '[AppConfigurationInitializer]';
+	};
+	
+    Chaos.AppConfigurationInitializer = AppConfigurationInitializer;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

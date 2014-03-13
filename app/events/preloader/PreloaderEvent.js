@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * event of PreloaderEvent.
      *
@@ -9,10 +10,14 @@
      * @namespace chaos.events.preloader
      * @extends chaos.AbstractEvent
      */
+=======
+	
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var PreloaderEvent = function($type, $percentage) {
 		this.percentage = $percentage;
 		this.type = $type;
 	};
+<<<<<<< HEAD
     /**
      * Fired when the pre-loader is completed and has reached 100%.
      *
@@ -44,4 +49,20 @@
 	};
 	
     chaos.PreloaderEvent = PreloaderEvent;
+=======
+	
+	PreloaderEvent.COMPLETE = "ns.preloaderevent:complete";
+	PreloaderEvent.STEP = "ns.preloaderevent:step";
+
+	var p = PreloaderEvent.prototype = new Chaos.AbstractEvent();
+	p.constructor = PreloaderEvent;
+	
+	p.percentage;
+
+	p.toString = function (){
+		return "[PreloaderEvent]";
+	};
+	
+    Chaos.PreloaderEvent = PreloaderEvent;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());

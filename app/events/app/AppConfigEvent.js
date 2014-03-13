@@ -1,4 +1,5 @@
 (function(){
+<<<<<<< HEAD
     /**
      * events for application config.
      *
@@ -7,10 +8,14 @@
      * @namespace chaos.events.app
      * @extends chaos.AbstractEvent
      */
+=======
+
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 	var AppConfigEvent = function($type) {
 		this.type = $type;
 	};
 
+<<<<<<< HEAD
     /**
      * Fired when app configuration is ready.
      *
@@ -41,4 +46,18 @@
 	};
 
     chaos.AppConfigEvent = AppConfigEvent;
+=======
+	AppConfigEvent.CONFIG_READY = 'ns.appconfigevent:config.ready';
+	AppConfigEvent.CONFIG_ERROR = 'ns.appconfigevent:config.error';
+	AppConfigEvent.CONFIG_LOAD = 'ns.appconfigevent:config.load';
+
+	var p = AppConfigEvent.prototype = new Chaos.AbstractEvent();
+	p.constructor = AppConfigEvent;
+
+	p.toString = function (){
+		return '[AppConfigEvent]';
+	};
+
+    Chaos.AppConfigEvent = AppConfigEvent;
+>>>>>>> e025f1cca61dc288972a92b7fb76be57d9d9e079
 }());
