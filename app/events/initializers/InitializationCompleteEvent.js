@@ -21,7 +21,7 @@
 
 	var p = InitializationCompleteEvent.prototype = new Chaos.Core.Event({
         name: 'InitializationCompleteEvent',
-        type: InitializationCompleteEvent.type
+        type: InitializationCompleteEvent.COMPLETE
     });
 	p.constructor = InitializationCompleteEvent;
 

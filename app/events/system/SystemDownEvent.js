@@ -11,7 +11,7 @@
 	var p = SystemDownEvent.prototype = new Chaos.Core.Event({
         name: 'SystemDownEvent',
         instruction: SystemDownEvent.instruction,
-        type: SystemDownEvent.type
+        type: SystemDownEvent.SYSTEM_DOWN
     });
 	p.constructor = SystemDownEvent;
 

@@ -94,7 +94,7 @@
 
 		if (this.queue.length > 0) {
 			var pctComplete = (this.MASTER_SEQUENCE.length-this.queue.length)/this.MASTER_SEQUENCE.length;
-			new chaos.PreloaderEvent(chaos.PreloaderEvent.STEP, pctComplete).dispatch();
+			new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.STEP, percentage: pctComplete }).dispatch();
 
 			var nextItem = this.queue.pop();
 			chaos.logger.info('Executing initializer: ' + nextItem.toString());
@@ -104,10 +104,10 @@
 				this.initializationComplete = true;
                 chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
                 chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
-				new chaos.PreloaderEvent(chaos.PreloaderEvent.STEP, 1).dispatch();
+				new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.STEP, percentage: 1 }).dispatch();
 				new chaos.InitializationCompleteEvent().dispatch();
 			    new Chaos.Core.Event(chaos.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();
-				new chaos.PreloaderEvent(chaos.PreloaderEvent.COMPLETE).dispatch();
+				new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.COMPLETE }).dispatch();
 
 			}
 		}
