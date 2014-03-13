@@ -1,4 +1,6 @@
 (function(){
+    'use strict';
+    
     /**
      * The class dispatches events so listeners can react accordingly.
      *
@@ -7,45 +9,13 @@
      * @param {Object} $target assign a object to the event.
      * @namespace chaos.events
      */
-    var EventDispatcher = function($target) {
-        this.target = $target;
-        this.events = [];
-    };
 
-    EventDispatcher.instance = null;
+    var EventDispatcher = Chaos.Core.BaseClass.create({
+        name: 'EventDispatcher'
+    });
 
-    EventDispatcher.getInstance = function (){
-        if(EventDispatcher.instance===null){
-            EventDispatcher.instance = new EventDispatcher();
-        }
-        return EventDispatcher.instance;
-    };
-
-    var p = EventDispatcher.prototype;
-    /**
-     * used to reference the target that this event is assigned to.
-     *
-     * @property target
-     * @type {Object}
-     * @default null
-     */
-    p.target;
-    /**
-     * contains all the events and listeners.
-     *
-     * @property events
-     * @type {Array}
-     * @default null
-     */
-    p.events;
-    /**
-     * initialize is used to run code after the class is instantiated.
-     * NOTE: you can delete this method and add your code right in the constructor.
-     * @method initialize
-     */
-    p.initialize = function ($target){
-        this.events = [];
-    };
+    EventDispatcher.target = null;
+    EventDispatcher.events = [];
 
     /**
      * used to find the event(s) and associated listener(s) calls their assigned methods.
@@ -57,7 +27,7 @@
      * @param {Event} $event is the event that is used to call the listeners assigned methods.
      * @return {Boolean} returns 'true' a listener was found and called and 'false' if no listeners were found.
      */
-    p.dispatchEvent = function ( $event )
+    EventDispatcher.dispatchEvent = function ( $event )
     {
         $event.target = (this.target ? this.target : $event.target);
 
@@ -74,7 +44,7 @@
     };
 
     //alias
-    p.emit = p.dispatchEvent;
+    EventDispatcher.emit = EventDispatcher.dispatchEvent;
     /**
      * Find the event(s) and associated listener(s) and calls their assigned methods.
      *  __example__
@@ -86,9 +56,8 @@
      * @param {Method} $listener is the method to call when the an event is dispatched.
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      */
-    p.addEventListener = function( $type, $listener, $context)
+    EventDispatcher.addEventListener = function( $type, $listener, $context)
     {
-
         if($context === undefined) {debugger}
         if($listener === undefined) {debugger}
         if($type === undefined) {debugger}
@@ -103,7 +72,7 @@
     };
 
     //alias
-    p.on = p.addEventListener;
+    EventDispatcher.on = EventDispatcher.addEventListener;
 
      /**
      * Remove an event listener.
@@ -116,7 +85,7 @@
      * @param {Method} $listener is the method to call when the an event is dispatched.
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      */
-    p.removeEventListener = function( $type, $listener, $context )
+    EventDispatcher.removeEventListener = function( $type, $listener, $context )
     {
 
         if($context === undefined) {debugger}
@@ -151,7 +120,7 @@
      * @param {Object} $context holds the class reference that is used to call the method and keep it in the relevant context of the class.
      * @return {Boolean} 'true' if event listener is assigned already.'false' if no event listener was found.
      */
-    p.hasEventListener = function ($type, $listener, $context){
+    EventDispatcher.hasEventListener = function ($type, $listener, $context){
 
         if($context === undefined) {debugger}
 
@@ -174,19 +143,12 @@
      * @param {Event} $event is the event that is used to call the listeners assigned methods.
      * @return {Array} returns an 'Array' of classes that are assigned to an 'Event'.
      */
-    p.getListenersForEvent = function($event){
+    EventDispatcher.getListenersForEvent = function($event){
         return _.pluck(this.events[$event], 'context');
     };
 
-    /**
-    * toString returns the class name.
-    *
-    * @method toString
-    * @return {String} Class name.
-    */
-    p.toString = function () {
-        return 'EventDispatcher';
-    };
-
     Chaos.Core.EventDispatcher = EventDispatcher;
+
+    //alias
+    Chaos.Core.Emitter = EventDispatcher;
 }());

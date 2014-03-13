@@ -49,13 +49,13 @@
      * @type {String}
      **/
 	LocalizationProxyEvent.LOCALIZATION_CONTENT_READY = 'chaos.localizationproxyevent::localization_content_ready';
-	
-	var p = LocalizationProxyEvent.prototype = new chaos.AbstractEvent();
+
+	var p = LocalizationProxyEvent.prototype = new Chaos.Core.Event({
+        name: 'LocalizationProxyEvent',
+        type: LocalizationProxyEvent.type,
+        params: LocalizationProxyEvent.params
+    });
 	p.constructor = LocalizationProxyEvent;
 
-	p.toString = function (){
-		return 'LocalizationProxyEvent';
-	};
-	
-chaos.LocalizationProxyEvent = LocalizationProxyEvent;
+    chaos.LocalizationProxyEvent = LocalizationProxyEvent;
 }());

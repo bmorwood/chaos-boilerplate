@@ -1,4 +1,6 @@
 (function(){
+    'use strict';
+    
     var Chaos = function() {
         var app = {
             Version: '0.1b',

@@ -26,12 +26,11 @@
      **/
 	SystemDownDisplayEvent.HIDE = 'chaos.systemdowndisplayevent::hide';
 
-	var p = SystemDownDisplayEvent.prototype = new chaos.AbstractEvent();
+	var p = SystemDownDisplayEvent.prototype = new Chaos.Core.Event({
+        name: 'SystemDownDisplayEvent',
+        type: SystemDownDisplayEvent.type
+    });
 	p.constructor = SystemDownDisplayEvent;
 
-	p.toString = function (){
-		return 'SystemDownDisplayEvent';
-	};
-	
     chaos.SystemDownDisplayEvent = SystemDownDisplayEvent;
 }());

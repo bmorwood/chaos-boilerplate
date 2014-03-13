@@ -18,13 +18,12 @@
      * @type {String}
      **/
 	InitializationCompleteEvent.COMPLETE = "chaos.initializationcompleteevent::complete";
-	
-	var p = InitializationCompleteEvent.prototype = new chaos.AbstractEvent();
+
+	var p = InitializationCompleteEvent.prototype = new Chaos.Core.Event({
+        name: 'InitializationCompleteEvent',
+        type: InitializationCompleteEvent.COMPLETE
+    });
 	p.constructor = InitializationCompleteEvent;
 
-	p.toString = function (){
-		return "InitializationCompleteEvent";
-	};
-	
     chaos.InitializationCompleteEvent = InitializationCompleteEvent;
 }());
