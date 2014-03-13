@@ -1,5 +1,11 @@
 (function(){
-
+    /**
+     * class of OverlayWindowManager.
+     *
+     * @class OverlayWindowManager
+     * @constructor
+     * @namespace chaos.viewmodels
+     */
 	var OverlayWindowManager = function() {
 	};
 
@@ -97,10 +103,15 @@
 	};
 
 	var p = OverlayWindowManager.prototype;
-
+    /**
+     * toString returns the class name.
+     *
+     * @method toString
+     * @return {String} Class name.
+     */
 	p.toString = function (){
-		return '[OverlayWindowManager]';
+		return 'OverlayWindowManager';
 	};
 
-    Chaos.OverlayWindowManager = OverlayWindowManager;
+    chaos.OverlayWindowManager = OverlayWindowManager;
 }());

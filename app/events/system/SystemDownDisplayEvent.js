@@ -1,18 +1,37 @@
 (function(){
-	
+    /**
+     * service of SystemDownDisplayEvent.
+     *
+     * @class SystemDownDisplayEvent
+     * @constructor
+     * @param {Event} $type event type.
+     * @namespace chaos.events.system
+     * @extends chaos.AbstractEvent
+     */
 	var SystemDownDisplayEvent = function($type) {
 		this.type = $type;
 	};
-	
-	SystemDownDisplayEvent.SHOW = "ns.system.down.display.event.show";
-	SystemDownDisplayEvent.HIDE = "ns.system.down.display.event.hide";
+    /**
+     * Fired when system down screen should show.
+     *
+     * @event SHOW
+     * @type {String}
+     **/
+	SystemDownDisplayEvent.SHOW = 'chaos.systemdowndisplayevent::show';
+    /**
+     * Fired when system down screen should hide.
+     *
+     * @event HIDE
+     * @type {String}
+     **/
+	SystemDownDisplayEvent.HIDE = 'chaos.systemdowndisplayevent::hide';
 
-	var p = SystemDownDisplayEvent.prototype = new Chaos.AbstractEvent();
+	var p = SystemDownDisplayEvent.prototype = new chaos.AbstractEvent();
 	p.constructor = SystemDownDisplayEvent;
 
 	p.toString = function (){
-		return "[SystemDownDisplayEvent]";
+		return 'SystemDownDisplayEvent';
 	};
 	
-    Chaos.SystemDownDisplayEvent = SystemDownDisplayEvent;
+    chaos.SystemDownDisplayEvent = SystemDownDisplayEvent;
 }());

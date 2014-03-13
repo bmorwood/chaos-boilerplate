@@ -1,38 +1,54 @@
 (function($window){
-
-    var Chaos = function($params){
-
-        var appSettings = Chaos.AppSettings.getInstance();
+    /**
+     * A utility that brokers HTTP requests...
+     *
+     * @class chaos
+     * @constructor
+     * @namespace chaos
+     **/
+    var chaos = function($params){
+        /**
+        * initialize the application.
+        *
+        * @attribute $params
+        * @type Object
+        * @default {width: 0, height: 0, container: '<div/>'}
+        **/
+        var appSettings = chaos.AppSettings.getInstance();
         appSettings.width = $params.width || appSettings.width;
         appSettings.height = $params.height || appSettings.height;
-        appSettings.rootContainer = $params.container || $('<div></div>', {
-            id:'ns-main-container',
+        appSettings.rootContainer = $params.container || $('<div></div>',{id:'chaos-main-container'});
+
+        appSettings.rootContainer.css({
             width: appSettings.width,
             height: appSettings.height,
-            css:{position:'relative'}
+            position:'relative',
+            overflow:'hidden'
         });
+
 
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
-        Chaos.ModelBinder = Chaos.KOModelBinder;
+        chaos.ModelBinder = Chaos.Core.KOModelBinder;
 
         //add controllers
-        Chaos.SystemDownController.getInstance();
+        chaos.SystemDownController.getInstance();
 
-        var main = new Chaos.Main();
-        //Chaos.Main.render(appSettings.rootContainer);
-        main.render(appSettings.rootContainer);
+        //var main = new chaos.Main();
+        chaos.Main.render(appSettings.rootContainer);
 
-        var preloader = new Chaos.PreloaderViewModel();
+        //main.render(appSettings.rootContainer);
+
+        var preloader = new chaos.PreloaderViewModel();
         preloader.render(appSettings.rootContainer);
 
-        var systemDown = new Chaos.SystemDownViewModel();
+        var systemDown = new chaos.SystemDownViewModel();
         systemDown.render(appSettings.rootContainer);
 
     };
 
-    Chaos.logger = {
+    chaos.logger = {
         log: function (){
             if(typeof console == 'object')
                 console.log(arguments[0]);
@@ -51,10 +67,10 @@
         }
     };
 
-    var p = Chaos.prototype;
+    var p = chaos.prototype;
 
     p.init = function (){
-        Chaos.InitializationSequenceOrchestrator.getInstance().run();
+        chaos.InitializationSequenceOrchestrator.getInstance().run();
     };
 
-    $window.Chaos = Chaos;
+    $window.chaos = chaos;

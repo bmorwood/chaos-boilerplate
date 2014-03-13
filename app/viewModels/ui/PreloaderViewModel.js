@@ -1,10 +1,17 @@
 (function(){
-
+    /**
+     * class of PreloaderViewModel.
+     *
+     * @class PreloaderViewModel
+     * @constructor
+     * @namespace chaos.viewmodels.ui
+     * @extends chaos.viewmodels.AbstractViewModel
+     */
 	var PreloaderViewModel = function() {
 		if (PreloaderViewModel.instance===null) {
 			PreloaderViewModel.instance = this;
 		}else{
-            Chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
 
@@ -17,7 +24,8 @@
 		return PreloaderViewModel.instance;
 	};
 
-	var p = PreloaderViewModel.prototype;
+	var p = PreloaderViewModel.prototype = new chaos.AbstractViewModel();
+    p.constructor = PreloaderViewModel;
 
 	p.id = 'chaos-preloader-container';
 
@@ -37,7 +45,7 @@
 	};
 
 	p.render = function($src){
-		this.elm = Chaos.templates['Preloader.html']();
+		this.elm = chaos.templates['Preloader.html']();
 		$src.append(this.elm);
 		ko.applyBindings(this, $('#' + this.id)[0]);
         this.addedToStage();
@@ -45,8 +53,8 @@
 
     p.addedToStage = function(){
 
-    Chaos.EventDispatcher.getInstance().addEventListener(Chaos.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
-    Chaos.EventDispatcher.getInstance().addEventListener(Chaos.PreloaderEvent.STEP, this.handleProgress, this);
+    chaos.EventDispatcher.getInstance().addEventListener(chaos.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
+    chaos.EventDispatcher.getInstance().addEventListener(chaos.PreloaderEvent.STEP, this.handleProgress, this);
 
         this.reset();
     };
@@ -76,10 +84,15 @@
 		this.currentPercent = 0;
         $('#chaos-preloader-bar').css({width: '0%'});
 	};
-
+    /**
+    * toString returns the class name.
+    *
+    * @method toString
+    * @return {String} Class name.
+    */
 	p.toString = function (){
-		return '[PreloaderViewModel]';
+		return 'PreloaderViewModel';
 	};
 
-    Chaos.PreloaderViewModel = PreloaderViewModel;
+    chaos.PreloaderViewModel = PreloaderViewModel;
 }());

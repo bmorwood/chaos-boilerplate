@@ -1,11 +1,17 @@
 (function(){
-
+    /**
+     * class of LocalizationProx uses i18N.
+     *
+     * @class LocalizationProxy
+     * @constructor
+     * @namespace chaos.proxies
+     */
 	var LocalizationProxy = function() {
 		if (LocalizationProxy.instance===null) {
 			LocalizationProxy.instance = this;
 			this.initialize();
 		}else{
-			Chaos.logger.error("You should not call the constructor for " + this.toString() + " directly.  It is a singleton, so you should use getInstance()");
+			chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
 
@@ -20,15 +26,28 @@
 		return LocalizationProxy.instance;
 	};
 
-	LocalizationProxy.DEFAULT_LOCALE_CODE = "en_us";
+    /**
+    system down button copy
+
+    @property DEFAULT_LOCALE_CODE
+    @type String
+    @default 'en_us'
+    @static
+    **/
+	LocalizationProxy.DEFAULT_LOCALE_CODE = 'en_us';
 
 	var p = LocalizationProxy.prototype;
 
     p.localeData;
     p.options;
 
+    /**
+    * initialize is used to run code after the class is instantiated.
+    * NOTE: you can delete this method and add your code right in the constructor.
+    * @method initialize
+    */
 	p.initialize = function (){
-        this.appSettings = Chaos.AppSettings.getInstance();
+        this.appSettings = chaos.AppSettings.getInstance();
 
         this.options = {
         lng: LocalizationProxy.DEFAULT_LOCALE_CODE ,
@@ -44,15 +63,15 @@
         if($locale)
             localeCode = $locale;
         else
-            localeCode = Chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
+            localeCode = chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
 
         this.options.lng = localeCode;
 
         var scope = this;
 
-        /*i18n.init(this.options, function($data) {
+        i18n.init(this.options, function($data) {
             scope.handleLoadLocalizedContentSuccess($data)
-        });*/
+        });
 	};
 
     p.loadLocalizedContentSystemDown = function ($locale){
@@ -62,15 +81,15 @@
         if($locale)
             localeCode = $locale;
         else
-            localeCode = Chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
+            localeCode = chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
 
         this.options.lng = localeCode;
 
         var scope = this;
 
-        /*i18n.init(this.options, function($data) {
+        i18n.init(this.options, function($data) {
             scope.handleLoadLocalizedContentSuccess($data)
-        });*/
+        });
 
     };
 
@@ -78,16 +97,22 @@
 
 		this.localeData = $data;
 
-		new Chaos.LocalizationProxyEvent(Chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS).dispatch();
+		new chaos.LocalizationProxyEvent(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS).dispatch();
 	};
 
 	p.handleLoadLocalizedContentFault = function($event){
-		new Chaos.LocalizationProxyEvent(Chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT).dispatch();
+		new chaos.LocalizationProxyEvent(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT).dispatch();
 	};
-
+    /**
+    * toString returns the class name.
+    *
+    * @method toString
+    * @return {String} Class name.
+    */
 	p.toString = function (){
-		return "[LocalizationProxy]";
+		return '[LocalizationProxy]';
 	};
 
-Chaos.LocalizationProxy = LocalizationProxy;
+
+chaos.LocalizationProxy = LocalizationProxy;
 }());

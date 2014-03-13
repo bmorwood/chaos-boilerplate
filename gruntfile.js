@@ -1,4 +1,16 @@
+var LIVERELOAD_PORT = 35729;
+var SERVER_PORT = 9000;
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+};
+
 module.exports = function(grunt) {
+
+    // show elapsed time at the end
+    require('time-grunt')(grunt);
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -24,10 +36,14 @@ module.exports = function(grunt) {
                     'bower_components/jquery-address/src/jquery.address.js',
                     'bower_components/greensock-js/src/uncompressed/**/*.js',
                     'bower_components/knockout/build/output/knockout-latest.js',
+                    'bower_components/knockout-mapping/build/output/knockout.mapping-latest.js',
                     'bower_components/modernizr/modernizr.js',
                     'bower_components/i18next/release/i18next-1.7.1.js',
                     'app/index.js',
-                    'app/**/*.js'],
+                    'app/core/Chaos.js',
+                    'app/**/*.js',
+                    '.tmp/*.js',
+                ],
                 dest: '<%= pkg.buildPath %>js/<%= pkg.name %>.min.js'
             }
         },
@@ -38,23 +54,22 @@ module.exports = function(grunt) {
                 compress: true
             },
             base:{
-               files: {
-                   '<%= pkg.buildPath %>css/default.css': 'css/default.less'
-               }
+                files: {
+                    '<%= pkg.buildPath %>css/default.css': 'css/**/*.less'
+                }
             }
         },
         copy: {
             main: {
                 files: [
                     {src: 'index.html', dest: '<%= pkg.buildPath %>'},
-                    {src: 'css/img/**/*', dest: '<%= pkg.buildPath %>'},
-                    {src: 'localized-copy/*', dest: '<%= pkg.buildPath %>'},
+                    {src: ['css/**/*', '!css/**/*.less'], dest: '<%= pkg.buildPath %>'},
                     {src: 'locales/**/*', dest: '<%= pkg.buildPath %>'}
                 ]
             },
             release: {
                 files: [
-                    {expand: true, cwd: 'build/', src: ['**'], dest: 'release/'}
+                    {expand: true, cwd: '<%= pkg.buildPath %>/', src: ['**'], dest: '<%= pkg.releasePath %>/'}
                 ]
             }
         },
@@ -63,16 +78,16 @@ module.exports = function(grunt) {
                 src: ['<%= pkg.buildPath %>']
             },
             release: {
-                src: ['<%= pkg.buildPath %>']
+                src: ['<%= pkg.releasePath %>']
             }
         },
         imagemin: {
             release: {
                 files: [{
                     expand: true,
-                    cwd: '<%= pkg.buildPath %>css/img/',
+                    cwd: '<%= pkg.releasePath %>css/imgs/',
                     src: ['**/*.{png,jpg,gif}'],
-                    dest: '<%= pkg.buildPath %>css/img/'
+                    dest: '<%= pkg.releasePath %>css/imgs/'
                 }]
             }
         },
@@ -86,41 +101,65 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    'build/js/template-data.js': 'app/**/*.html'
+                    '.tmp/template-data.js': 'app/**/*.html'
                 }
             }
         },
         watch: {
-            files: ['<%= concat.core.src %>', '*.html', 'app/**/*.html'],
-            tasks: ['build']
+            livereload: {
+                options: {
+                    livereload: {port: LIVERELOAD_PORT}
+                },
+                files: ['<%= concat.core.src %>', '*.html', 'app/**/*.html', 'css/**/*'],
+                tasks: ['base']
+            }
         },
         connect: {
-            server: {
+            options: {
+                port: SERVER_PORT,
+                base: 'build/',
+                hostname: 'localhost',
+                livereload: LIVERELOAD_PORT
+            },
+            build:{
                 options: {
-                    port: 9001,
-                    base: 'build/',
-                    keepalive: true
-                }
+                    base: 'build/'
+                },
+                server:{}
+            },
+            release:{
+                options: {
+                    base: 'release/'
+                },
+                server:{}
+            }
+
+        },
+        open: {
+            server: {
+                path: 'http://127.0.0.1:<%= connect.options.port %>/index.html'
+            }
+        },
+        yuidoc: {
+            options: {
+                paths: 'app/',
+                outdir: 'docs/'
+            },
+            dist: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '0',
+                url: 'website.com'
             }
         }
     });
 
-    // Load the plugin that provides the 'uglify' task.
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-
     // Default task(s).
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['clean:build', 'copy:main', 'concat', 'less', 'handlebars']);
+    grunt.registerTask('base', ['clean:build', 'copy:main', 'handlebars', 'concat', 'less']);
+    grunt.registerTask('build', ['base', 'connect:build', 'open', 'watch']);
     grunt.registerTask('release', function (){
-        var tasks = ['build', 'clean:release', 'imagemin', 'uglify', 'htmlmin', 'copy:release'];
+        var tasks = ['base', 'yuidoc', 'clean:release', 'uglify', 'copy:release', 'imagemin', 'connect:release', 'open', 'watch'];
         grunt.option('force', true);
         grunt.task.run(tasks);
     });

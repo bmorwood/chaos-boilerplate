@@ -1,5 +1,11 @@
 (function(){
-	
+    /**
+     * class of OverlayContainerWindow.
+     *
+     * @class OverlayContainerWindow
+     * @constructor
+     * @namespace chaos.viewmodels
+     */
 	var OverlayContainerWindow = function($name, $window, $isModal, $x, $y) {
 		this.name = $name;
 		this.window = $window;
@@ -15,10 +21,15 @@
 	p.isModal;
 	p.y;
 	p.x;
-
+    /**
+     * toString returns the class name.
+     *
+     * @method toString
+     * @return {String} Class name.
+     */
 	p.toString = function (){
-		return '[OverlayContainerWindow]';
+		return 'OverlayContainerWindow';
 	};
 
-    Chaos.OverlayContainerWindow = OverlayContainerWindow;
+    chaos.OverlayContainerWindow = OverlayContainerWindow;
 }());

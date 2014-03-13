@@ -14,18 +14,22 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div id="Chaos-container"></div>
+        <div id="chaos-container"></div>
 
         <script src="js/project.min.js"></script>
-        <script src="js/template-data.js"></script>
 
         <script>
-            var project = new Chaos({
-                width:600,
-                height:400
-            });
+            $(document).ready(function(){
 
-            project.init();
+                var project = new chaos({
+                    width:600,
+                    height:400,
+                    container: $('#chaos-container')
+                });
+
+                project.init();
+
+            });
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
