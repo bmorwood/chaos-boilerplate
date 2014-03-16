@@ -30,15 +30,8 @@ module.exports = function(grunt) {
                     footer: '}(window));'
                 },
                 src: [
-                    'bower_components/handlebars/handlebars.runtime.js',
-                    'bower_components/jquery/jquery.js',
-                    'bower_components/underscore/underscore.js',
-                    'bower_components/jquery-address/src/jquery.address.js',
-                    'bower_components/greensock-js/src/uncompressed/**/*.js',
-                    'bower_components/knockout/build/output/knockout-latest.js',
-                    'bower_components/knockout-mapping/build/output/knockout.mapping-latest.js',
-                    'bower_components/modernizr/modernizr.js',
-                    'bower_components/i18next/release/i18next-1.7.1.js',
+                    'vendor/jquery.js',
+                    'vendor/**/*.js',
                     'app/index.js',
                     'app/core/Chaos.js',
                     'app/core/*.js',
