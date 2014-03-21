@@ -32,5 +32,5 @@
     });
 	p.constructor = SystemDownDisplayEvent;
 
-    chaos.SystemDownDisplayEvent = SystemDownDisplayEvent;
+    Chaos.NS.SystemDownDisplayEvent = SystemDownDisplayEvent;
 }());

@@ -58,5 +58,5 @@
                 return 'AbstractViewModel';
             };
 
- chaos.AbstractViewModel = AbstractViewModel;
+    Chaos.NS.AbstractViewModel = AbstractViewModel;
 }());

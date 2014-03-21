@@ -36,5 +36,5 @@
     });
 
     LocalizationEvent.constructor = p;
-    chaos.LocalizationEvent = LocalizationEvent;
+    Chaos.NS.LocalizationEvent = LocalizationEvent;
 }());

@@ -32,9 +32,7 @@ module.exports = function(grunt) {
                 src: [
                     'vendor/jquery.js',
                     'vendor/**/*.js',
-                    'app/index.js',
-                    'app/core/Chaos.js',
-                    'app/core/*.js',
+                    'app/main.js',
                     'app/**/*.js',
                     '.tmp/*.js',
                 ],
@@ -88,7 +86,7 @@ module.exports = function(grunt) {
         handlebars: {
             compile: {
                 options: {
-                    namespace: '<%= pkg.nameSpace %>.templates',
+                    namespace: 'Chaos.NS.templates',
                     processName: function(filePath) { // input:  **/*.html
                         var pieces = filePath.split('/');
                         return pieces[pieces.length - 1]; // output: *.html

@@ -24,7 +24,7 @@
             Main.instance = this;
             this.initialize();
         }else{
-            chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
         }
     };
 
@@ -37,7 +37,7 @@
         return Main.instance;
     };
 
-    var p = Main.prototype = new chaos.AbstractViewModel();
+    var p = Main.prototype = new Chaos.NS.AbstractViewModel();
     p.constructor = Main;
 
     p.id = 'chaos-main';
@@ -47,11 +47,11 @@
 
         this.msg = ko.observable();
 
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.updateCopy, this );
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.updateCopy, this );
     };
 
     p.render = function($src){
-        var elm = chaos.templates['Main.html']();
+        var elm = Chaos.NS.templates['Main.html']();
         $src.append(elm);
         ko.applyBindings(this, $('#' + this.id)[0]);
         this.addedToStage();
@@ -62,7 +62,7 @@
     };
 
     p.updateCopy = function(){
-        this.msg(chaos.LC.WELCOME_MESSAGE);
+        this.msg(Chaos.NS.LC.WELCOME_MESSAGE);
     };
 
     p.dispose = function (){
@@ -73,6 +73,5 @@
         return 'Main';
     };
 
-
-    chaos.Main = Main;
+    Chaos.NS.Main = Main;
 }());

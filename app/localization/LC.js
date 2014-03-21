@@ -58,7 +58,7 @@
 
         this.WELCOME_MESSAGE = locales("core.welcome-message");
 
-        new chaos.LocalizationProxyEvent(chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY).dispatch();
+        new Chaos.NS.LocalizationProxyEvent(chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY).dispatch();
     };
     /**
     * toString returns the class name.
@@ -70,5 +70,5 @@
         return 'LC';
     };
 
-    chaos.LC = LC;
+    Chaos.NS.LC = LC;
 }());

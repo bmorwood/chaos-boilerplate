@@ -14,7 +14,7 @@
 			SystemDownController.instance = this;
 			this.initialize();
 		}else{
-			chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
 
@@ -38,16 +38,16 @@
 		return SystemDownController.instance;
 	};
 
-    var p = SystemDownController.prototype = new chaos.AbstractController();
+    var p = SystemDownController.prototype = new Chaos.NS.AbstractController();
 	p.constructor = SystemDownController;
 	
 	p.initialize = function (){
-		this.addCommand(chaos.SystemDownEvent.SYSTEM_DOWN, chaos.SystemDownCommand);
+		this.addCommand(Chaos.NS.SystemDownEvent.SYSTEM_DOWN, Chaos.NS.SystemDownCommand);
 	};
 
 	p.toString = function (){
 		return 'SystemDownController';
 	};
 
-    chaos.SystemDownController = SystemDownController;
+    Chaos.NS.SystemDownController = SystemDownController;
 }());

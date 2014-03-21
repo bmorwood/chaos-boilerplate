@@ -24,7 +24,7 @@
 		return PreloaderViewModel.instance;
 	};
 
-	var p = PreloaderViewModel.prototype = new chaos.AbstractViewModel();
+	var p = PreloaderViewModel.prototype = new Chaos.NS.AbstractViewModel();
     p.constructor = PreloaderViewModel;
 
 	p.id = 'chaos-preloader-container';
@@ -45,7 +45,7 @@
 	};
 
 	p.render = function($src){
-		this.elm = chaos.templates['Preloader.html']();
+		this.elm = Chaos.NS.templates['Preloader.html']();
 		$src.append(this.elm);
 		ko.applyBindings(this, $('#' + this.id)[0]);
         this.addedToStage();
@@ -53,8 +53,8 @@
 
     p.addedToStage = function(){
 
-    chaos.EventDispatcher.getInstance().addEventListener(chaos.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
-    chaos.EventDispatcher.getInstance().addEventListener(chaos.PreloaderEvent.STEP, this.handleProgress, this);
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.STEP, this.handleProgress, this);
 
         this.reset();
     };
@@ -94,5 +94,5 @@
 		return 'PreloaderViewModel';
 	};
 
-    chaos.PreloaderViewModel = PreloaderViewModel;
+    Chaos.NS.PreloaderViewModel = PreloaderViewModel;
 }());

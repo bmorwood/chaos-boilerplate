@@ -6,7 +6,11 @@
      * @constructor
      * @namespace chaos
      **/
+
+    Chaos.setNameSpace('chaos');
+
     var chaos = function($params){
+
         /**
         * initialize the application.
         *
@@ -14,7 +18,7 @@
         * @type Object
         * @default {width: 0, height: 0, container: '<div/>'}
         **/
-        var appSettings = chaos.AppSettings.getInstance();
+        var appSettings = Chaos.NS.AppSettings.getInstance();
         appSettings.width = $params.width || appSettings.width;
         appSettings.height = $params.height || appSettings.height;
         appSettings.rootContainer = $params.container || $('<div></div>',{id:'chaos-main-container'});
@@ -30,26 +34,26 @@
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
-        chaos.EventDispatcher = Chaos.Core.EventDispatcher;
-        chaos.ModelBinder = Chaos.Core.KOModelBinder;
+        Chaos.NS.EventDispatcher = Chaos.Core.EventDispatcher;
+        Chaos.NS.ModelBinder = Chaos.Core.KOModelBinder;
 
         //add controllers
-        chaos.SystemDownController.getInstance();
+        Chaos.NS.SystemDownController.getInstance();
 
         //var main = new chaos.Main();
-        chaos.Main.render(appSettings.rootContainer);
+        Chaos.NS.Main.render(appSettings.rootContainer);
 
         //main.render(appSettings.rootContainer);
 
-        var preloader = new chaos.PreloaderViewModel();
+        var preloader = new Chaos.NS.PreloaderViewModel();
         preloader.render(appSettings.rootContainer);
 
-        var systemDown = new chaos.SystemDownViewModel();
+        var systemDown = new Chaos.NS.SystemDownViewModel();
         systemDown.render(appSettings.rootContainer);
 
     };
 
-    chaos.logger = {
+    Chaos.NS.logger = {
         log: function (){
             if(typeof console == 'object')
                 console.log(arguments[0]);
@@ -71,7 +75,8 @@
     var p = chaos.prototype;
 
     p.init = function (){
-        chaos.InitializationSequenceOrchestrator.getInstance().run();
+        Chaos.NS.InitializationSequenceOrchestrator.getInstance().run();
     };
 
     $window.chaos = chaos;
+

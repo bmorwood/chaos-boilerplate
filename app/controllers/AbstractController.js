@@ -17,7 +17,7 @@
 
 	p.addCommand = function ($eventName, $command){
         if(!AbstractController.commands[$eventName]){
-            chaos.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
+            Chaos.NS.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
             AbstractController.commands[$eventName] = [];
             AbstractController.commands[$eventName].push({event:$eventName, command:$command});
         }else{
@@ -40,7 +40,7 @@
         }
 
         if(AbstractController.commands[$eventName].length <= 0){
-            chaos.EventDispatcher.getInstance().removeEventListener($eventName, AbstractController.handleEvent, this);
+            Chaos.NS.EventDispatcher.getInstance().removeEventListener($eventName, AbstractController.handleEvent, this);
             AbstractController.commands[$eventName] = null;
             delete AbstractController.commands[$eventName];
         }
@@ -94,5 +94,5 @@
 		return 'AbstractController';
 	};
 
-    chaos.AbstractController = AbstractController;
+    Chaos.NS.AbstractController = AbstractController;
 }());

@@ -11,7 +11,7 @@
 		if (SystemDownViewModel.instance===null) {
 			SystemDownViewModel.instance = this;
 		}else{
-            chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
 
@@ -24,7 +24,7 @@
 		return SystemDownViewModel.instance;
 	};
 	
-	var p = SystemDownViewModel.prototype = new chaos.AbstractViewModel();
+	var p = SystemDownViewModel.prototype = new Chaos.NS.AbstractViewModel();
     p.constructor = SystemDownViewModel;
 	
 	p.h1Txt;
@@ -35,8 +35,8 @@
 
 	p.initialize = function (){
 
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.SystemDownDisplayEvent.SHOW, this.handleShowSystemDown, this );
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.SystemDownDisplayEvent.HIDE, this.handleHideSystemDown, this );
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.SHOW, this.handleShowSystemDown, this );
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.HIDE, this.handleHideSystemDown, this );
 		
 		this.h1Txt = ko.observable();
 		this.h2Txt = ko.observable();
@@ -45,24 +45,24 @@
 	
 	p.handleShowSystemDown = function($event){
 
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
-        chaos.LocalizationProxy.getInstance().loadLocalizedContentSystemDown();
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.NS.LocalizationProxy.getInstance().loadLocalizedContentSystemDown();
 	};
 	
 	p.handleDataSuccess = function($data){
-        chaos.EventDispatcher.getInstance().removeEventListener(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
-        chaos.LC.initialize();
+        Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
+        Chaos.NS.LC.initialize();
 	};
 
     p.contentReady = function(){
 
-    chaos.EventDispatcher.getInstance().removeEventListener(chaos.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
+        Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
 
-        if(chaos.LC.SYSTEM_DOWN_H1 !== ''){
-            this.h1Txt(chaos.LC.SYSTEM_DOWN_H1);
-            this.h2Txt(chaos.LC.SYSTEM_DOWN_H2);
-            this.buttonTxt(chaos.LC.SYSTEM_DOWN_BUTTON);
+        if(Chaos.NS.LC.SYSTEM_DOWN_H1 !== ''){
+            this.h1Txt(Chaos.NS.LC.SYSTEM_DOWN_H1);
+            this.h2Txt(Chaos.NS.LC.SYSTEM_DOWN_H2);
+            this.buttonTxt(Chaos.NS.LC.SYSTEM_DOWN_BUTTON);
         }else{
             h1 = 'the project is in the shop for a scheduled maintenance. We\'ll be back in no time.';
             h2 = 'Check out our other services.';
@@ -81,7 +81,7 @@
 	};
 
 	p.render = function($src){
-		var elm = chaos.templates['SystemDown.html']();
+		var elm = Chaos.NS.templates['SystemDown.html']();
 		$src.append(elm);
 		this.initialize();
 		ko.applyBindings(this, $('#' + this.id)[0]);
@@ -95,5 +95,5 @@
 		return 'SystemDownViewModel';
 	};
 
-    chaos.SystemDownViewModel = SystemDownViewModel;
+    Chaos.NS.SystemDownViewModel = SystemDownViewModel;
 }());

@@ -12,7 +12,7 @@
 		this.initialize();
 	};
 
-	var p = AppConfigurationInitializer.prototype = new chaos.AbstractInitializer();
+	var p = AppConfigurationInitializer.prototype = new Chaos.NS.AbstractInitializer();
 	p.constructor = AppConfigurationInitializer;
     /**
     * initialize is used to run code after the class is instantiated.
@@ -22,20 +22,20 @@
 	p.initialize = function (){		
 		this.$initialize(
 			'APP_CONFIG_INITIALIZER',
-            chaos.AppConfigEvent.CONFIG_READY,
-            chaos.AppConfigEvent.CONFIG_ERROR
+            Chaos.NS.AppConfigEvent.CONFIG_READY,
+            Chaos.NS.AppConfigEvent.CONFIG_ERROR
 			);
 	};
 	
 	p.execute = function (){
 		this.$execute();
 
-        chaos.AppProperties.getInstance().init();
+        Chaos.NS.AppProperties.getInstance().init();
 	};
 
 	p.toString = function (){
 		return 'AppConfigurationInitializer';
 	};
-	
-    chaos.AppConfigurationInitializer = AppConfigurationInitializer;
+
+    Chaos.NS.AppConfigurationInitializer = AppConfigurationInitializer;
 }());

@@ -35,10 +35,10 @@
 
 	var p = AppConfigEvent.prototype = new Chaos.Core.Event({
         name: 'AppConfigEvent',
-        type: AppConfigEvent.$type
+        type: AppConfigEvent.AppConfigEvent
     });
 
 	p.constructor = AppConfigEvent;
 
-    chaos.AppConfigEvent = AppConfigEvent;
+    Chaos.NS.AppConfigEvent = AppConfigEvent;
 }());

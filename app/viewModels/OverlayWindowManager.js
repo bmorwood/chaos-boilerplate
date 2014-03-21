@@ -113,5 +113,5 @@
 		return 'OverlayWindowManager';
 	};
 
-    chaos.OverlayWindowManager = OverlayWindowManager;
+    Chaos.NS.OverlayWindowManager = OverlayWindowManager;
 }());

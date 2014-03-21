@@ -41,10 +41,10 @@
 		this.faultEventName = $faultEventName||'';
 		
 		if (this.successEventName != '')
-            chaos.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
+            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
 			
 		if (this.faultEventName != '')
-            chaos.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
+            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
 	};
     /**
     * $execute is used to execute code that needs to complete before the application is ready to use. NOTE: execute is called by the orchesterator {{#crossLink "chaos.orchestrators.InitializationSequenceOrchestrator"}}{{/crossLink}}.
@@ -54,8 +54,8 @@
     */
 	p.$execute = function (){
 		if (this.successEventName === '' && this.faultEventName === ''){
-			chaos.logger.info('Initializer: ' + this.name + ' executed.');
-			new chaos.InitializerSuccessEvent(this.name).dispatch();
+            Chaos.NS.logger.info('Initializer: ' + this.name + ' executed.');
+			new Chaos.NS.InitializerSuccessEvent(this.name).dispatch();
 		}	
 	};
     /**
@@ -74,8 +74,8 @@
     */
 	p.$success = function($event){
 		this.removeCompletionListeners();
-        chaos.logger.info('Initializer: ' + this.name + ' succeeded.');
-		new chaos.InitializerSuccessEvent(this.name).dispatch();
+        Chaos.NS.logger.info('Initializer: ' + this.name + ' succeeded.');
+		new Chaos.NS.InitializerSuccessEvent(this.name).dispatch();
 	};
     /**
     * success is used as a method placeholder to be overwriting when extended by another class / prototype, to call the super 'success' use $success.
@@ -93,8 +93,8 @@
     */
 	p.$fault = function($event) {
 		this.removeCompletionListeners();
-        chaos.logger.error('Initializer: ' + this.name + ' failed.');
-		new chaos.InitializerFaultEvent(this.name).dispatch();
+        Chaos.NS.logger.error('Initializer: ' + this.name + ' failed.');
+		new Chaos.NS.InitializerFaultEvent(this.name).dispatch();
 	};
     /**
     * fault is used as a method placeholder to be overwriting when extended by another class / prototype, to call the super 'fault' use $fault.
@@ -111,12 +111,12 @@
     */
 	p.$reset = function(){
 
-		if (!_.isEmpty(this.successEventName) && !chaos.EventDispatcher.getInstance().hasEventListener(this.successEventName, this.success, this))   {
-            chaos.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
+		if (!_.isEmpty(this.successEventName) && !Chaos.NS.EventDispatcher.getInstance().hasEventListener(this.successEventName, this.success, this))   {
+            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
         }
 
-		if (!_.isEmpty(this.faultEventName) && !chaos.EventDispatcher.getInstance().hasEventListener(this.faultEventName, this.fault, this)) {
-            chaos.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
+		if (!_.isEmpty(this.faultEventName) && !Chaos.NS.EventDispatcher.getInstance().hasEventListener(this.faultEventName, this.fault, this)) {
+            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
         }
 	};
     /**
@@ -133,8 +133,8 @@
     * @method removeCompletionListeners
     */
 	p.removeCompletionListeners = function() {
-        chaos.EventDispatcher.getInstance().removeEventListener(this.successEventName, this.success, this);
-        chaos.EventDispatcher.getInstance().removeEventListener(this.faultEventName, this.fault, this);
+        Chaos.NS.EventDispatcher.getInstance().removeEventListener(this.successEventName, this.success, this);
+        Chaos.NS.EventDispatcher.getInstance().removeEventListener(this.faultEventName, this.fault, this);
 	};
 
     /**
@@ -147,5 +147,5 @@
 		return 'AbstractInitializer';
 	};
 
-    chaos.AbstractInitializer = AbstractInitializer;
+    Chaos.NS.AbstractInitializer = AbstractInitializer;
 }());

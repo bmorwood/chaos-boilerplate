@@ -25,5 +25,5 @@
     });
 	p.constructor = InitializationCompleteEvent;
 
-    chaos.InitializationCompleteEvent = InitializationCompleteEvent;
+    Chaos.NS.InitializationCompleteEvent = InitializationCompleteEvent;
 }());

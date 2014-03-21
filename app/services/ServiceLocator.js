@@ -11,7 +11,7 @@
 			ServiceLocator.instance = this;
 			this.initialize();
 		}else{
-			chaos.logger.error("You should not call the constructor for " + this.toString() + " directly.  It is a singleton, so you should use getInstance()");
+            Chaos.NS.logger.error("You should not call the constructor for " + this.toString() + " directly.  It is a singleton, so you should use getInstance()");
 		}
 	};
 
@@ -47,8 +47,8 @@
 		var protocol = this.extractProtocol();
 		var hostWithPort = this.extractHostWithPort();
 		var serviceBaseUrl;
-		
-		chaos.logger.info('Service Locator sees host with port: ' + hostWithPort);
+
+        Chaos.NS.logger.info('Service Locator sees host with port: ' + hostWithPort);
 		
 		if (this.serviceDictionary[hostWithPort]) {
 			// Return appropriate mapping URL from dictionary.
@@ -57,8 +57,8 @@
 			// Return default if nothing else matched.
 			serviceBaseUrl = this.serviceDictionary['localhost'];
 		}
-		
-		chaos.logger.info('NS Service Locator resolved service URL to: ' + serviceBaseUrl);
+
+        Chaos.NS.logger.info('NS Service Locator resolved service URL to: ' + serviceBaseUrl);
 		
 		return this.serviceBaseUrl = serviceBaseUrl;
 	};
@@ -70,7 +70,7 @@
 	p.extractHostWithPort = function() {
 		var base = $.address.baseURL();
 
-		chaos.logger.info('NS Service Locator sees base URL: ' + base);
+        Chaos.NS.logger.info('NS Service Locator sees base URL: ' + base);
 
 		if (base && base != '')
 			return base.split('//')[1].toString().split('')[0].toString();
@@ -85,6 +85,6 @@
 	p.toString = function (){
 		return 'ServiceLocator';
 	};
-	
-chaos.ServiceLocator = ServiceLocator;
+
+    Chaos.NS.ServiceLocator = ServiceLocator;
 }());

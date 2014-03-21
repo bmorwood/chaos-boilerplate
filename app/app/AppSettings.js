@@ -11,7 +11,7 @@
             AppSettings.instance = this;
             this.initialize();
         }else{
-            chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
         }
     };
 
@@ -79,5 +79,5 @@
         return 'AppSettings';
     };
 
-    chaos.AppSettings = AppSettings;
+    Chaos.NS.AppSettings = AppSettings;
 }());

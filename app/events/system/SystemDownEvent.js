@@ -1,6 +1,4 @@
 (function(){
-
-
 	var SystemDownEvent = function($instruction) {
 		this.instruction = $instruction;
 		this.type = SystemDownEvent.SYSTEM_DOWN;
@@ -16,5 +14,5 @@
 	p.constructor = SystemDownEvent;
 
 
-    chaos.SystemDownEvent = SystemDownEvent;
+    Chaos.NS.SystemDownEvent = SystemDownEvent;
 }());

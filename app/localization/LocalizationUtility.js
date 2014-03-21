@@ -11,7 +11,7 @@
             LocalizationUtility.instance = this;
             this.initialize();
         }else{
-            chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly. It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly. It is a singleton, so you should use getInstance()');
         }
     };
 
@@ -32,7 +32,7 @@
     LocalizationUtility.getContent = function ($sectionKey, $fieldKey){
         var returnValue = (LocalizationUtility.localizationHash[$sectionKey] && LocalizationUtility.localizationHash[$sectionKey][$fieldKey]) ? LocalizationUtility.localizationHash[$sectionKey][$fieldKey] : '';
         if(returnValue == '')
-            chaos.logger.warn($sectionKey+', '+$fieldKey+' was not found in the localization hash');
+            Chaos.NS.logger.warn($sectionKey+', '+$fieldKey+' was not found in the localization hash');
 
 
         return returnValue.replace('®', '<sup>®</sup>').replace('(MD)', '<sup>MD</sup>');
@@ -61,7 +61,7 @@
     LocalizationUtility.repopulate = function($localizedContent){
         LocalizationUtility.localizedContent = $localizedContent;
         LocalizationUtility.prepData();
-        new chaos.LocalizationProxyEvent(chaos.LocalizationEvent.REPOPULATED).dispatch();
+        new Chaos.NS.LocalizationProxyEvent(chaos.LocalizationEvent.REPOPULATED).dispatch();
     };
 
     LocalizationUtility.initialized = false;
@@ -79,5 +79,5 @@
         return '[LocalizationUtility]';
     };
 
-    chaos.LocalizationUtility = LocalizationUtility;
+    Chaos.NS.LocalizationUtility = LocalizationUtility;
 }());

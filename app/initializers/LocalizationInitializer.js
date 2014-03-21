@@ -10,7 +10,7 @@
 		this.initialize();
 	};
 
-	var p = LocalizationInitializer.prototype = new chaos.AbstractInitializer();
+	var p = LocalizationInitializer.prototype = new Chaos.NS.AbstractInitializer();
 	p.constructor = LocalizationInitializer;
 	
 	p.localizationProxy;
@@ -21,10 +21,10 @@
     */
 	p.initialize = function (){
 		this.$initialize('LOCALIZATION_INITIALIZER',
-			chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS,
-			chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT
+            Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS,
+            Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT
 			);
-		this.localizationProxy = chaos.LocalizationProxy.getInstance();
+		this.localizationProxy = Chaos.NS.LocalizationProxy.getInstance();
 	};
 	
 	p.execute = function (){
@@ -33,7 +33,7 @@
 	};
 	
 	p.success = function ($event){
-        chaos.LC.initialize();
+        Chaos.NS.LC.initialize();
         this.$success($event);
 	};
 
@@ -46,6 +46,6 @@
 	p.toString = function (){
 		return 'LocalizationInitializer';
 	};
-	
-chaos.LocalizationInitializer = LocalizationInitializer;
+
+    Chaos.NS.LocalizationInitializer = LocalizationInitializer;
 }());

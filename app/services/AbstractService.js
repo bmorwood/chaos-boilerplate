@@ -54,5 +54,5 @@
 		return 'AbstractService';
 	};
 
-    chaos.AbstractService = AbstractService;
+    Chaos.NS.AbstractService = AbstractService;
 }());

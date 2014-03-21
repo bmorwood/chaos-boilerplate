@@ -28,5 +28,5 @@
     });
 	p.constructor = InitializerFaultEvent;
 
-    chaos.InitializerFaultEvent = InitializerFaultEvent;
+    Chaos.NS.InitializerFaultEvent = InitializerFaultEvent;
 }());

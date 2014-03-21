@@ -11,7 +11,7 @@
 			InitializationSequenceOrchestrator.instance = this;
 			this.initialize();
 		}else{
-			chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+			Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
     /**
@@ -67,8 +67,8 @@
     * @method initialize
     */
 	p.initialize = function (){
-        var APP_CONFIG = new chaos.AppConfigurationInitializer();
-        var LOCALIZATION = new chaos.LocalizationInitializer();
+        var APP_CONFIG = new Chaos.NS.AppConfigurationInitializer();
+        var LOCALIZATION = new Chaos.NS.LocalizationInitializer();
 
         this.MASTER_SEQUENCE.push(APP_CONFIG);
        // this.MASTER_SEQUENCE.push(LOCALIZATION);
@@ -79,10 +79,10 @@
     */
 	p.run = function () {
 
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
-        chaos.EventDispatcher.getInstance().addEventListener(chaos.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
+        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
 
-		chaos.logger.info('beginning initialization...');
+		Chaos.NS.logger.info('beginning initialization...');
 		this.queue = _.clone(this.MASTER_SEQUENCE).reverse(); //reverse because we're going to use pop() method later
 		this.next();
 	};
@@ -94,20 +94,20 @@
 
 		if (this.queue.length > 0) {
 			var pctComplete = (this.MASTER_SEQUENCE.length-this.queue.length)/this.MASTER_SEQUENCE.length;
-			new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.STEP, percentage: pctComplete }).dispatch();
+			new Chaos.NS.PreloaderEvent({ type: Chaos.NS.PreloaderEvent.STEP, percentage: pctComplete }).dispatch();
 
 			var nextItem = this.queue.pop();
-			chaos.logger.info('Executing initializer: ' + nextItem.toString());
+			Chaos.NS.logger.info('Executing initializer: ' + nextItem.toString());
 			nextItem.execute();
 		}else{
 			if (!this.initializationComplete) {
 				this.initializationComplete = true;
-                chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
-                chaos.EventDispatcher.getInstance().removeEventListener(chaos.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
-				new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.STEP, percentage: 1 }).dispatch();
-				new chaos.InitializationCompleteEvent().dispatch();
-			    new Chaos.Core.Event(chaos.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();
-				new chaos.PreloaderEvent({ type: chaos.PreloaderEvent.COMPLETE }).dispatch();
+                Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
+                Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
+				new Chaos.NS.PreloaderEvent({ type: Chaos.NS.PreloaderEvent.STEP, percentage: 1 }).dispatch();
+				new Chaos.NS.InitializationCompleteEvent().dispatch();
+			    new Chaos.Core.Event(Chaos.NS.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();
+				new Chaos.NS.PreloaderEvent({ type: Chaos.NS.PreloaderEvent.COMPLETE }).dispatch();
 
 			}
 		}
@@ -124,7 +124,7 @@
     * @method handleInitializerFault
     */
 	p.handleInitializerFault = function($event){
-		new chaos.SystemDownEvent(chaos.SystemDownDisplayEvent.SHOW).dispatch();
+		new Chaos.NS.SystemDownEvent(Chaos.NS.SystemDownDisplayEvent.SHOW).dispatch();
 	};
     /**
     * toString returns the class name.
@@ -136,5 +136,5 @@
 		return 'InitializationSequenceOrchestrator';
 	};
 
-    chaos.InitializationSequenceOrchestrator = InitializationSequenceOrchestrator;
+    Chaos.NS.InitializationSequenceOrchestrator = InitializationSequenceOrchestrator;
 }());

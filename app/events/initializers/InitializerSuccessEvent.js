@@ -27,5 +27,5 @@
         initializerName: InitializerSuccessEvent.initializerName
     });
 	p.constructor = InitializerSuccessEvent;
-    chaos.InitializerSuccessEvent = InitializerSuccessEvent;
+    Chaos.NS.InitializerSuccessEvent = InitializerSuccessEvent;
 }());

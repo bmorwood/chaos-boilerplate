@@ -11,7 +11,7 @@
 			LocalizationProxy.instance = this;
 			this.initialize();
 		}else{
-			chaos.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
+            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
 		}
 	};
 
@@ -47,7 +47,7 @@
     * @method initialize
     */
 	p.initialize = function (){
-        this.appSettings = chaos.AppSettings.getInstance();
+        this.appSettings = Chaos.NS.AppSettings.getInstance();
 
         this.options = {
         lng: LocalizationProxy.DEFAULT_LOCALE_CODE ,
@@ -63,7 +63,7 @@
         if($locale)
             localeCode = $locale;
         else
-            localeCode = chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
+            localeCode = Chaos.NS.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
 
         this.options.lng = localeCode;
 
@@ -81,7 +81,7 @@
         if($locale)
             localeCode = $locale;
         else
-            localeCode = chaos.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
+            localeCode = Chaos.NS.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
 
         this.options.lng = localeCode;
 
@@ -97,11 +97,11 @@
 
 		this.localeData = $data;
 
-		new chaos.LocalizationProxyEvent(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS).dispatch();
+		new Chaos.NS.LocalizationProxyEvent(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS).dispatch();
 	};
 
 	p.handleLoadLocalizedContentFault = function($event){
-		new chaos.LocalizationProxyEvent(chaos.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT).dispatch();
+		new Chaos.NS.LocalizationProxyEvent(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT).dispatch();
 	};
     /**
     * toString returns the class name.
@@ -113,6 +113,5 @@
 		return '[LocalizationProxy]';
 	};
 
-
-chaos.LocalizationProxy = LocalizationProxy;
+    Chaos.NS.LocalizationProxy = LocalizationProxy;
 }());

@@ -70,8 +70,8 @@
     * @method init
     */
     p.init = function(){
-        this.serviceBaseURL =  chaos.ServiceLocator.getInstance().getServiceBaseUrl();
-        new chaos.AppConfigEvent(chaos.AppConfigEvent.CONFIG_READY).dispatch();
+        this.serviceBaseURL =  Chaos.NS.ServiceLocator.getInstance().getServiceBaseUrl();
+        new Chaos.nameSpace.AppConfigEvent(Chaos.NS.AppConfigEvent.CONFIG_READY).dispatch();
     };
 
     /**
@@ -84,5 +84,5 @@
 		return 'AppProperties';
 	};
 
-    chaos.AppProperties = AppProperties;
+    Chaos.nameSpace.AppProperties = AppProperties;
 }());

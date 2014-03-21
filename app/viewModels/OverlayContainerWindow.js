@@ -31,5 +31,5 @@
 		return 'OverlayContainerWindow';
 	};
 
-    chaos.OverlayContainerWindow = OverlayContainerWindow;
+    Chaos.NS.OverlayContainerWindow = OverlayContainerWindow;
 }());
