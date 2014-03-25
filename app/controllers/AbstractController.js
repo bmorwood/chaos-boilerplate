@@ -17,7 +17,7 @@
 
 	p.addCommand = function ($eventName, $command){
         if(!AbstractController.commands[$eventName]){
-            Chaos.NS.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
+            Chaos.Core.EventDispatcher.getInstance().addEventListener($eventName, AbstractController.handleEvent, this);
             AbstractController.commands[$eventName] = [];
             AbstractController.commands[$eventName].push({event:$eventName, command:$command});
         }else{
@@ -40,7 +40,7 @@
         }
 
         if(AbstractController.commands[$eventName].length <= 0){
-            Chaos.NS.EventDispatcher.getInstance().removeEventListener($eventName, AbstractController.handleEvent, this);
+            Chaos.Core.EventDispatcher.getInstance().removeEventListener($eventName, AbstractController.handleEvent, this);
             AbstractController.commands[$eventName] = null;
             delete AbstractController.commands[$eventName];
         }
@@ -72,7 +72,7 @@
                 //NGP.logger.log(this, eventListeners[i], $event );
                 var classRef = classRefs[i].command;
                 if(!classRef){
-                chaos.logger.warn("command class not found for event type", $event.type);
+                Chaos.NS.logger.warn("command class not found for event type", $event.type);
                 } else {
                     var commandClass = new classRef();
                     commandClass.execute($event);

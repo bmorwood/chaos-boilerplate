@@ -47,7 +47,7 @@
 
         this.msg = ko.observable();
 
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.updateCopy, this );
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.updateCopy, this );
     };
 
     p.render = function($src){

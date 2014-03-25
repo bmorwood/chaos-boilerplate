@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 src: [
                     'vendor/jquery.js',
                     'vendor/**/*.js',
-                    'app/main.js',
+                    'app/Main.js',
                     'app/**/*.js',
                     '.tmp/*.js',
                 ],

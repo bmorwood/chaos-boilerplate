@@ -79,8 +79,8 @@
     */
 	p.run = function () {
 
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
 
 		Chaos.NS.logger.info('beginning initialization...');
 		this.queue = _.clone(this.MASTER_SEQUENCE).reverse(); //reverse because we're going to use pop() method later
@@ -102,8 +102,8 @@
 		}else{
 			if (!this.initializationComplete) {
 				this.initializationComplete = true;
-                Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
-                Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
+                Chaos.Core.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerSuccessEvent.SUCCESS, this.handleInitializerSuccess, this);
+                Chaos.Core.EventDispatcher.getInstance().removeEventListener(Chaos.NS.InitializerFaultEvent.FAULT, this.handleInitializerFault, this);
 				new Chaos.NS.PreloaderEvent({ type: Chaos.NS.PreloaderEvent.STEP, percentage: 1 }).dispatch();
 				new Chaos.NS.InitializationCompleteEvent().dispatch();
 			    new Chaos.Core.Event(Chaos.NS.Controller.NOTIFY_APPLICATION_ACTIVATED).dispatch();

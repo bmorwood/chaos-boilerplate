@@ -27,9 +27,9 @@
 	p.execute = function($event){
 
 		if($event.instruction == chaos.SystemDownDisplayEvent.SHOW)
-			new chaos.SystemDownDisplayEvent(chaos.SystemDownDisplayEvent.SHOW).dispatch();
+			new Chaos.NS.SystemDownDisplayEvent(chaos.SystemDownDisplayEvent.SHOW).dispatch();
 		if($event.instruction == chaos.SystemDownDisplayEvent.HIDE)
-			new chaos.SystemDownDisplayEvent(chaos.SystemDownDisplayEvent.HIDE).dispatch();
+			new Chaos.NS.SystemDownDisplayEvent(chaos.SystemDownDisplayEvent.HIDE).dispatch();
 	}
     /**
     * toString returns the class name.

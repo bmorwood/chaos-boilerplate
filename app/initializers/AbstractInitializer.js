@@ -41,10 +41,10 @@
 		this.faultEventName = $faultEventName||'';
 		
 		if (this.successEventName != '')
-            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
+            Chaos.Core.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
 			
 		if (this.faultEventName != '')
-            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
+            Chaos.Core.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
 	};
     /**
     * $execute is used to execute code that needs to complete before the application is ready to use. NOTE: execute is called by the orchesterator {{#crossLink "chaos.orchestrators.InitializationSequenceOrchestrator"}}{{/crossLink}}.
@@ -111,12 +111,12 @@
     */
 	p.$reset = function(){
 
-		if (!_.isEmpty(this.successEventName) && !Chaos.NS.EventDispatcher.getInstance().hasEventListener(this.successEventName, this.success, this))   {
-            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
+		if (!_.isEmpty(this.successEventName) && !Chaos.Core.EventDispatcher.getInstance().hasEventListener(this.successEventName, this.success, this))   {
+            Chaos.Core.EventDispatcher.getInstance().addEventListener(this.successEventName, this.success, this);
         }
 
-		if (!_.isEmpty(this.faultEventName) && !Chaos.NS.EventDispatcher.getInstance().hasEventListener(this.faultEventName, this.fault, this)) {
-            Chaos.NS.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
+		if (!_.isEmpty(this.faultEventName) && !Chaos.Core.EventDispatcher.getInstance().hasEventListener(this.faultEventName, this.fault, this)) {
+            Chaos.Core.EventDispatcher.getInstance().addEventListener(this.faultEventName, this.fault, this);
         }
 	};
     /**
@@ -133,8 +133,8 @@
     * @method removeCompletionListeners
     */
 	p.removeCompletionListeners = function() {
-        Chaos.NS.EventDispatcher.getInstance().removeEventListener(this.successEventName, this.success, this);
-        Chaos.NS.EventDispatcher.getInstance().removeEventListener(this.faultEventName, this.fault, this);
+        Chaos.Core.EventDispatcher.getInstance().removeEventListener(this.successEventName, this.success, this);
+        Chaos.Core.EventDispatcher.getInstance().removeEventListener(this.faultEventName, this.fault, this);
 	};
 
     /**

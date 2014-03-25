@@ -53,8 +53,8 @@
 
     p.addedToStage = function(){
 
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.STEP, this.handleProgress, this);
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.COMPLETE, this.handlePreloadComplete, this);
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.PreloaderEvent.STEP, this.handleProgress, this);
 
         this.reset();
     };

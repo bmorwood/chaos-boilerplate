@@ -35,8 +35,8 @@
 
 	p.initialize = function (){
 
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.SHOW, this.handleShowSystemDown, this );
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.HIDE, this.handleHideSystemDown, this );
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.SHOW, this.handleShowSystemDown, this );
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.SystemDownDisplayEvent.HIDE, this.handleHideSystemDown, this );
 		
 		this.h1Txt = ko.observable();
 		this.h2Txt = ko.observable();
@@ -45,19 +45,19 @@
 	
 	p.handleShowSystemDown = function($event){
 
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
         Chaos.NS.LocalizationProxy.getInstance().loadLocalizedContentSystemDown();
 	};
 	
 	p.handleDataSuccess = function($data){
-        Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
-        Chaos.NS.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
+        Chaos.Core.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS, this.handleDataSuccess, this );
+        Chaos.Core.EventDispatcher.getInstance().addEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
         Chaos.NS.LC.initialize();
 	};
 
     p.contentReady = function(){
 
-        Chaos.NS.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
+        Chaos.Core.EventDispatcher.getInstance().removeEventListener(Chaos.NS.LocalizationEvent.LOCALIZATION_CONTENT_READY, this.contentReady, this);
 
         if(Chaos.NS.LC.SYSTEM_DOWN_H1 !== ''){
             this.h1Txt(Chaos.NS.LC.SYSTEM_DOWN_H1);

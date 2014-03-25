@@ -11,13 +11,6 @@
 
     var chaos = function($params){
 
-        /**
-        * initialize the application.
-        *
-        * @attribute $params
-        * @type Object
-        * @default {width: 0, height: 0, container: '<div/>'}
-        **/
         var appSettings = Chaos.NS.AppSettings.getInstance();
         appSettings.width = $params.width || appSettings.width;
         appSettings.height = $params.height || appSettings.height;
@@ -34,8 +27,8 @@
         if(!$params.container)
             $(document.body).append(appSettings.rootContainer);
 
-        Chaos.NS.EventDispatcher = Chaos.Core.EventDispatcher;
-        Chaos.NS.ModelBinder = Chaos.Core.KOModelBinder;
+        chaos.EventDispatcher = Chaos.Core.EventDispatcher;
+        chaos.ModelBinder = Chaos.Core.KOModelBinder;
 
         //add controllers
         Chaos.NS.SystemDownController.getInstance();
