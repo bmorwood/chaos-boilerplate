@@ -30,11 +30,11 @@ module.exports = function(grunt) {
                     footer: '}(window));'
                 },
                 src: [
+                    '.tmp/*.js',
                     'vendor/jquery.js',
                     'vendor/**/*.js',
                     'app/Main.js',
-                    'app/**/*.js',
-                    '.tmp/*.js',
+                    'app/**/*.js'
                 ],
                 dest: '<%= pkg.buildPath %>js/<%= pkg.name %>.min.js'
             }
@@ -83,20 +83,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        handlebars: {
-            compile: {
-                options: {
-                    namespace: 'Chaos.NS.templates',
-                    processName: function(filePath) { // input:  **/*.html
-                        var pieces = filePath.split('/');
-                        return pieces[pieces.length - 1]; // output: *.html
-                    }
-                },
-                files: {
-                    '.tmp/template-data.js': 'app/**/*.html'
-                }
-            }
-        },
         watch: {
             livereload: {
                 options: {
@@ -143,12 +129,34 @@ module.exports = function(grunt) {
                 version: '0',
                 url: 'website.com'
             }
+        },
+        htmlConvert: {
+            options: {
+                base: '',
+                rename: function($moduleName){
+                    return $moduleName.split('/').reverse()[0];
+                },
+                fileHeaderString: 'var Chaos = Chaos || {}; Chaos.NS = Chaos.NS || {};'
+            },
+            "ChaosTemplates": {
+                src: ['app/**/*.html'],
+                dest: '.tmp/template-data.js'
+            }
+        },
+        imageEmbed: {
+            dist: {
+                src: [ '<%= pkg.buildPath %>css/default.css' ],
+                dest: '<%= pkg.buildPath %>css/default.css',
+                options: {
+                    deleteAfterEncoding : false
+                }
+            }
         }
     });
 
     // Default task(s).
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('base', ['clean:build', 'copy:main', 'handlebars', 'concat', 'less']);
+    grunt.registerTask('base', ['clean:build', 'copy:main', 'htmlConvert', 'concat', 'less']);
     grunt.registerTask('build', ['base', 'connect:build', 'open', 'watch']);
     grunt.registerTask('release', function (){
         var tasks = ['base', 'yuidoc', 'clean:release', 'uglify', 'copy:release', 'imagemin', 'connect:release', 'open', 'watch'];

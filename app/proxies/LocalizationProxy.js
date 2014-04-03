@@ -1,117 +1,43 @@
 (function(){
-    /**
-     * class of LocalizationProx uses i18N.
-     *
-     * @class LocalizationProxy
-     * @constructor
-     * @namespace chaos.proxies
-     */
-	var LocalizationProxy = function() {
-		if (LocalizationProxy.instance===null) {
-			LocalizationProxy.instance = this;
-			this.initialize();
-		}else{
-            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly.  It is a singleton, so you should use getInstance()');
-		}
-	};
+    var LocalizationProxy = Chaos.Singleton.extend({
+        name: 'LocalizationProxy',
+        DEFAULT_LOCALE_CODE: 'en_us',
+        localeData: null,
+        init: function () {
+            this.appSettings = Chaos.NS.AppSettings.getInstance();
+        },
+        loadLocalizedContent: function() {
+            var localeCode;
 
-	LocalizationProxy.instance = null;
+            if($locale)
+                localeCode = $locale;
+            else
+                localeCode = Chaos.NS.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
 
-	LocalizationProxy.getInstance = function (){
+            //var url = 'locales/' + localeCode + '.json';
+            var url = 'locales/en-us.json';
 
-		if(LocalizationProxy.instance===null){
-			LocalizationProxy.instance = new LocalizationProxy();
-		}
+            var self = this;
 
-		return LocalizationProxy.instance;
-	};
+            $.get(url, function ($data) {
 
-    /**
-    system down button copy
+                if(typeof $data === 'string')
+                    $data = JSON.parse($data);
 
-    @property DEFAULT_LOCALE_CODE
-    @type String
-    @default 'en_us'
-    @static
-    **/
-	LocalizationProxy.DEFAULT_LOCALE_CODE = 'en_us';
+                self.handleLoadLocalizedContentSuccess($data);
+            }).error(function ($data) {
+                self.handleLoadLocalizedContentFault($data);
+            });
+        },
+        handleLoadLocalizedContentSuccess: function() {
+            this.localeData = $data;
 
-	var p = LocalizationProxy.prototype;
-
-    p.localeData;
-    p.options;
-
-    /**
-    * initialize is used to run code after the class is instantiated.
-    * NOTE: you can delete this method and add your code right in the constructor.
-    * @method initialize
-    */
-	p.initialize = function (){
-        this.appSettings = Chaos.NS.AppSettings.getInstance();
-
-        this.options = {
-        lng: LocalizationProxy.DEFAULT_LOCALE_CODE ,
-        lowerCaseLng:true,
-        resGetPath: 'locales/__lng__/__ns__.json'
-        };
-	};
-
-	p.loadLocalizedContent = function ($locale){
-
-        var localeCode;
-
-        if($locale)
-            localeCode = $locale;
-        else
-            localeCode = Chaos.NS.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
-
-        this.options.lng = localeCode;
-
-        var scope = this;
-
-        i18n.init(this.options, function($data) {
-            scope.handleLoadLocalizedContentSuccess($data)
-        });
-	};
-
-    p.loadLocalizedContentSystemDown = function ($locale){
-
-        var localeCode;
-
-        if($locale)
-            localeCode = $locale;
-        else
-            localeCode = Chaos.NS.AppProperties.getInstance().locale || LocalizationProxy.DEFAULT_LOCALE_CODE;
-
-        this.options.lng = localeCode;
-
-        var scope = this;
-
-        i18n.init(this.options, function($data) {
-            scope.handleLoadLocalizedContentSuccess($data)
-        });
-
-    };
-
-	p.handleLoadLocalizedContentSuccess = function($data){
-
-		this.localeData = $data;
-
-		new Chaos.NS.LocalizationProxyEvent(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS).dispatch();
-	};
-
-	p.handleLoadLocalizedContentFault = function($event){
-		new Chaos.NS.LocalizationProxyEvent(Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT).dispatch();
-	};
-    /**
-    * toString returns the class name.
-    *
-    * @method toString
-    * @return {String} Class name.
-    */
-	p.toString = function (){
-		return '[LocalizationProxy]';
-	};
+            new Chaos.NS.LocalizationProxyEvent({type:Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_SUCCESS}).dispatch();
+        },
+        handleLoadLocalizedContentFault: function() {
+            new Chaos.NS.LocalizationProxyEvent({type: Chaos.NS.LocalizationProxyEvent.LOAD_LOCALIZATION_CONTENT_FAULT}).dispatch();
+        }
+    });
 
     Chaos.NS.LocalizationProxy = LocalizationProxy;
 }());

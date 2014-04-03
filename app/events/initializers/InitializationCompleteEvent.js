@@ -1,29 +1,8 @@
 (function(){
-    /**
-     * event of InitializationCompleteEvent.
-     *
-     * @class InitializationCompleteEvent
-     * @constructor
-     * @namespace chaos.events.initializers
-     * @extends chaos.AbstractEvent
-     */
-	var InitializationCompleteEvent = function() {
-		this.type = InitializationCompleteEvent.COMPLETE;
-	};
-
-    /**
-     * Fired when initializer is completed without an errors.
-     *
-     * @event COMPLETE
-     * @type {String}
-     **/
-	InitializationCompleteEvent.COMPLETE = "chaos.initializationcompleteevent::complete";
-
-	var p = InitializationCompleteEvent.prototype = new Chaos.Core.Event({
+    Chaos.Event.register({
         name: 'InitializationCompleteEvent',
-        type: InitializationCompleteEvent.COMPLETE
+        events: {
+            COMPLETE: true
+        }
     });
-	p.constructor = InitializationCompleteEvent;
-
-    Chaos.NS.InitializationCompleteEvent = InitializationCompleteEvent;
 }());

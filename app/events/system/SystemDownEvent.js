@@ -1,18 +1,9 @@
 (function(){
-	var SystemDownEvent = function($instruction) {
-		this.instruction = $instruction;
-		this.type = SystemDownEvent.SYSTEM_DOWN;
-	};
-
-    SystemDownEvent.SYSTEM_DOWN = 'chaos.systemdownevent::system.down';
-
-	var p = SystemDownEvent.prototype = new Chaos.Core.Event({
+    Chaos.Event.register({
         name: 'SystemDownEvent',
-        instruction: SystemDownEvent.instruction,
-        type: SystemDownEvent.SYSTEM_DOWN
+        events: {
+            SYSTEM_DOWN: true,
+            STEP: true
+        }
     });
-	p.constructor = SystemDownEvent;
-
-
-    Chaos.NS.SystemDownEvent = SystemDownEvent;
 }());

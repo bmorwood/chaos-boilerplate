@@ -1,30 +1,8 @@
 (function(){
-    /**
-    * not yet implemented.
-    *
-    * @class LocalizationUtility
-     * @constructor
-     * @namespace chaos.localization
-    */
-    var LocalizationUtility = function() {
-        if (LocalizationUtility.instance===null) {
-            LocalizationUtility.instance = this;
-            this.initialize();
-        }else{
-            Chaos.NS.logger.error('You should not call the constructor for ' + this.toString() + ' directly. It is a singleton, so you should use getInstance()');
-        }
-    };
 
-    LocalizationUtility.instance = null;
-
-    LocalizationUtility.getInstance = function (){
-
-        if(LocalizationUtility.instance===null){
-            LocalizationUtility.instance = new LocalizationUtility();
-        }
-
-        return LocalizationUtility.instance;
-    };
+    var LocalizationUtility = Chaos.Singleton.extend({
+        name:'LocalizationUtility'
+    });
 
     LocalizationUtility.localizationHash = [];
     LocalizationUtility.localizedContent = [];
@@ -61,23 +39,10 @@
     LocalizationUtility.repopulate = function($localizedContent){
         LocalizationUtility.localizedContent = $localizedContent;
         LocalizationUtility.prepData();
-        new Chaos.NS.LocalizationProxyEvent(chaos.LocalizationEvent.REPOPULATED).dispatch();
+        new Chaos.NS.LocalizationProxyEvent(Chaos.NS.LocalizationEvent.REPOPULATED).dispatch();
     };
 
     LocalizationUtility.initialized = false;
-
-    var p = LocalizationUtility.prototype;
-
-    p.initialize = function (){};
-    /**
-    * toString returns the class name.
-    *
-    * @method toString
-    * @return {String} Class name.
-    */
-    p.toString = function (){
-        return '[LocalizationUtility]';
-    };
 
     Chaos.NS.LocalizationUtility = LocalizationUtility;
 }());
